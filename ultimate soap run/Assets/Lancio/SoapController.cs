@@ -27,6 +27,7 @@ public class SoapController : MonoBehaviour
     public int throwMultiplier;
     public float startingX;
     private Rigidbody rigidBody;
+    public GameObject trail;
 
 
     state state=state.Waiting;
@@ -133,14 +134,14 @@ public class SoapController : MonoBehaviour
             case state.Moving:
                 rigidBody.constraints = RigidbodyConstraints.None;
 
-                if (transform.eulerAngles.x<=335)
+                if (transform.eulerAngles.x<=320)
                 {
                     moveToBorder();
                     Debug.Log("moving");
                     break;
                 }
                 Debug.Log("throw");
-              
+              trail.SetActive(true);
                 rigidBody.AddForce(-transform.right * throwForce * throwMultiplier, ForceMode.Impulse);
                 state = state.Waiting;
                 break;
