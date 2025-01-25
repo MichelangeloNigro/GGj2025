@@ -11,6 +11,7 @@ public class DynamicButtonManager : MonoBehaviour
     public List<GameObject> items; // List of items to assign to buttons
 
     private int currentIndex = 0; // Tracks the current index in the items list
+    private List<GameObject> shuffledItems; // List of shuffled items
 
     private void Start()
     {
@@ -20,25 +21,28 @@ public class DynamicButtonManager : MonoBehaviour
             return;
         }
 
+        // Initialize the shuffled list of items
+        ShuffleItems();
+
         // Initialize buttons
         UpdateButtons();
     }
 
     public void UpdateButtons()
     {
-        // Loop through each button and assign an item to it
+        // Loop through each button and assign a random item from shuffled list
         for (int i = 0; i < buttons.Length; i++)
         {
-            if (i + currentIndex < items.Count)
+            if (i + currentIndex < shuffledItems.Count)
             {
-                GameObject item = items[i + currentIndex];
+                GameObject item = shuffledItems[i + currentIndex];
                 Button button = buttons[i];
 
-                // Update button text
+                // Update button text with the correct name from the shuffled list
                 Text buttonText = button.GetComponentInChildren<Text>();
                 if (buttonText != null)
                 {
-                    buttonText.text = item.name;
+                    buttonText.text = item.name; // Use the name of the item
                 }
 
                 // Assign the prefab to the button's click event
@@ -56,7 +60,7 @@ public class DynamicButtonManager : MonoBehaviour
 
     public void NextPage()
     {
-        if (currentIndex + buttons.Length < items.Count)
+        if (currentIndex + buttons.Length < shuffledItems.Count)
         {
             currentIndex += buttons.Length;
             UpdateButtons();
@@ -82,5 +86,20 @@ public class DynamicButtonManager : MonoBehaviour
 
         // Deactivate the button after it has been pressed
         button.gameObject.SetActive(false);
+    }
+
+    private void ShuffleItems()
+    {
+        // Create a copy of the items list and shuffle it
+        shuffledItems = new List<GameObject>(items);
+
+        // Fisher-Yates shuffle algorithm
+        for (int i = shuffledItems.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1); // Random index between 0 and i
+            GameObject temp = shuffledItems[i];
+            shuffledItems[i] = shuffledItems[j];
+            shuffledItems[j] = temp;
+        }
     }
 }
