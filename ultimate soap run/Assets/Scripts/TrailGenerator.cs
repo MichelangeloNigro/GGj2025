@@ -6,7 +6,12 @@ using UnityEngine;
 public enum PlayerColor
 {
     Blue,
-    Red
+    Red,
+    Green,
+    Yellow,
+    Purple,
+    Black,
+    Pink,
 };
 public class TrailGenerator : MonoBehaviour
 {
@@ -47,12 +52,27 @@ public class TrailGenerator : MonoBehaviour
     {
         switch (playerColor)
         {
-            case PlayerColor.Red :
+            case PlayerColor.Red:
                 return Color.red;
             case PlayerColor.Blue:
                 return Color.blue;
+            case PlayerColor.Green:
+                return Color.green;
+                break;
+            case PlayerColor.Yellow:
+                return Color.yellow;
+                break;
+            case PlayerColor.Purple:
+                return new Color(0.43f,0,0.404f,1);
+                break;
+            case PlayerColor.Black:
+                return Color.black;
+                break;
+            case PlayerColor.Pink:
+                return new Color(1,0.7f,0.976f,1);
+                break;
         }
-        
+
         return Color.black;
     }
 }

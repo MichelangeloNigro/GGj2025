@@ -13,7 +13,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     public DynamicButtonManager buttonManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    IEnumerator Start()
+    IEnumerator StartGame()
     {
         pointManager = FindObjectOfType<PointManager>();
         while (turnNumbers < maxTurns)
