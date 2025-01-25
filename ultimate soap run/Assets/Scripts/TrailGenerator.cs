@@ -2,20 +2,21 @@ using System;
 using Unity.Mathematics;
 using UnityEngine;
 
+[Serializable]
+public enum PlayerColor
+{
+    Blue,
+    Red
+};
 public class TrailGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject particlePrefab;
     [SerializeField] private float interval = 0.5f;
     
-    [Serializable] 
-    public enum PlayerColor
-    {
-        Blue,
-        Red
-    };
+ 
 
     [SerializeField]
-    private PlayerColor playerColor;
+    public PlayerColor playerColor;
 
     private float time;
 
