@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -12,6 +13,8 @@ public class GridSystem : MonoBehaviour
     public Color occupiedColor = Color.red; // Color for cells with objects
     public GameObject prefabToSpawn;    // Prefab to spawn in the center of detected cells
     public string targetTag = "Target"; // Tag to check for objects
+
+    private List<GameObject> pointsSpawned = new List<GameObject>();
 
     void OnDrawGizmos()
     {
@@ -96,7 +99,19 @@ public class GridSystem : MonoBehaviour
         }
 
         // Instantiate the prefab at the given position with no rotation
-        Instantiate(prefabToSpawn, position, Quaternion.identity);
+        GameObject newObject;
+        newObject = Instantiate(prefabToSpawn, position, Quaternion.identity);
+        pointsSpawned.Add(newObject);
+    }
+
+    public void ClearList()
+    {
+        foreach (var obj in pointsSpawned)
+        {
+            DestroyImmediate(obj);
+        }
+        
+        pointsSpawned.Clear();
     }
 }
 
@@ -114,6 +129,11 @@ public class GridEditor : Editor
         if (GUILayout.Button("Generate Points"))
         {
             grid.SpawnPrefabInTouchingCells();
+        }
+
+        if (GUILayout.Button("Clear Points"))
+        {
+            grid.ClearList();
         }
     }
 }

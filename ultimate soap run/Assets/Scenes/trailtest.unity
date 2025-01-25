@@ -739,17 +739,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c013c327428c67e4db74f173141e4ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawShader: {fileID: 4800000, guid: d931ba7a2db9c7540a6b039617eaa794, type: 3}
-  playerFeet: {fileID: 0}
-  brushSize: 1
-  paintColor:
-    r: 1
-    g: 0
-    b: 0
-    a: 1
-  splatMap: {fileID: 0}
-  paintMaterial: {fileID: 0}
-  meshMaterial: {fileID: 0}
 --- !u!1 &1557564277
 GameObject:
   m_ObjectHideFlags: 0
