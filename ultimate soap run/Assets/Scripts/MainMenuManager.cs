@@ -52,6 +52,8 @@ public class MainMenuManager : MonoBehaviour
             if (choosingPlayer==PlayerManager.Instance.playerList.Count)
             {
                 Debug.Log("startGame");
+                Destroy(currSoapModel);
+                currPanel.SetActive(false);
                 PlayerManager.Instance.Begin();
             }
             else
@@ -75,7 +77,7 @@ public class MainMenuManager : MonoBehaviour
             currSoap = soaps.Count-1;
 
         }
-       currSoapModel= Instantiate(soaps[currSoap],spawnObj.transform.position,Quaternion.identity);
+       currSoapModel= Instantiate(soaps[currSoap], spawnObj.transform.position, soaps[currSoap].transform.rotation);
         namesoap.text=currSoapModel.name.Replace("(Clone)","");
         PlayerManager.Instance.playerList[choosingPlayer].prefabSoap = soaps[currSoap];
     }
