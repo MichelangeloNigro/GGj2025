@@ -9,6 +9,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     public int maxTurns;
     public PointManager pointManager;
     public BuildingPlacer placer;
+    public DynamicButtonManager buttonManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     IEnumerator Start()
     {
@@ -58,6 +59,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
         pointManager.PrintPlayerPointPercentages();
         placer.state = PlaceState.Pick;
         Restart();
+        buttonManager.StartPlacing();
         while (placer.state != PlaceState.End)
         {
             yield return null;

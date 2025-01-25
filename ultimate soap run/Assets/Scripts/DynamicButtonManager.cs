@@ -13,7 +13,7 @@ public class DynamicButtonManager : MonoBehaviour
     private int currentIndex = 0; // Tracks the current index in the items list
     private List<GameObject> shuffledItems; // List of shuffled items
 
-    private void StartPlacing()
+    public void StartPlacing()
     {
         if (buttons.Length > 4)
         {
