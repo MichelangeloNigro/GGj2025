@@ -12,6 +12,7 @@ public enum PlaceState
 
 public class BuildingPlacer : MonoBehaviour
 {
+    public GameObject pickingCanvas;
     public static BuildingPlacer instance; // (Singleton pattern)
 
     public LayerMask groundLayerMask;
@@ -37,18 +38,13 @@ public class BuildingPlacer : MonoBehaviour
 
     private void Update()
     {
-        if (playersThatPlaced >= numberOfPlayers)
-        {
-            state = PlaceState.End;
-            playersThatPlaced = 0;
-        }
-
         switch (state)
         { 
             case PlaceState.Wait:
                 return;
             case PlaceState.Pick:
-                return; 
+                OpenPickMenu();
+                break;
             case PlaceState.Place:
                 PlaceObject(); 
                 break; 
@@ -58,6 +54,11 @@ public class BuildingPlacer : MonoBehaviour
         }
     }
 
+    private void OpenPickMenu()
+    {
+        if(!pickingCanvas.activeSelf)
+            pickingCanvas.SetActive(true);
+    }
 
     public void SetBuildingPrefab(GameObject prefab)
     {
@@ -66,6 +67,7 @@ public class BuildingPlacer : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
 
         state = PlaceState.Place;
+        pickingCanvas.SetActive(false);
     }
 
     protected virtual void _PrepareBuilding()
@@ -127,6 +129,16 @@ public class BuildingPlacer : MonoBehaviour
                         _toBuild = null;
 
                         playersThatPlaced++;
+                        
+                        if (playersThatPlaced >= numberOfPlayers)
+                        {
+                            state = PlaceState.End;
+                            playersThatPlaced = 0;
+                        }
+                        else
+                        {
+                            state = PlaceState.Pick;
+                        }
                     }
                 }
             }
