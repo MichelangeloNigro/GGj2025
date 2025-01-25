@@ -5,22 +5,20 @@ using UnityEngine;
 public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager> 
 {
     public List<Player> playerList;
-    public int turnNumbers;
-
-    public void instancePlayerTub(Player player)
-    {
-        Instantiate(player.prefabSoap);
-
-    }
-    public void startGame()
-    {
-
-    }
+    private int turnNumbers;
+    public int maxTurns;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    IEnumerator Start()
     {
-        StartCoroutine(InstantiatePlayers());
+        while (turnNumbers < maxTurns)
+        {
+            yield return StartCoroutine(InstantiatePlayers()); // Wait for InstantiatePlayers to complete
+            turnNumbers++; // Increment turnNumbers after InstantiatePlayers is done
+        }
+
+        Debug.Log("All turns are completed!");
     }
+
 
     IEnumerator InstantiatePlayers()
     {
@@ -30,6 +28,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
             player.soapIntance = soap;
             player.soapIntance.GetComponentInChildren<TrailGenerator>(true).playerColor = player.color;
             var controller = player.soapIntance.GetComponent<SoapController>();
+            player.soapController= controller;
             // Wait until soap.state equals state.wait
             while (controller.state != state.Waiting)
             {
@@ -57,6 +56,14 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     }
     private void Restart()
     {
+        foreach(Player player in playerList)
+        {
+            Destroy(player.soapIntance);
+            foreach (var particleSystem in FindObjectsOfType<ParticleSystem>())
+            {
+                Destroy(particleSystem.gameObject);
+            }
+        }
 
     }
     private bool AllSoapsAreInEndState()

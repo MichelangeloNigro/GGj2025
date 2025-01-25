@@ -19,18 +19,12 @@ public enum state
 public class SoapController : MonoBehaviour
 {
     private float strenght;
-    private float soapLeft;
-    private Vector2 startingPoint;
-    private float startingRotation;
-    private List<Tuple<Vector2,float>> startingPointsANDrotation = new List<Tuple<Vector2, float>>();
     private float throwForce;
     public GameObject stecca;
     public int throwMultiplier;
     public float startingX;
     private Rigidbody rigidBody;
     public GameObject trail;
-
-
     public state state=state.Position;
     //attenzione la layer mask viene contata in binario, perch� unity xd 
     public LayerMask maskFloor;
@@ -71,7 +65,7 @@ public class SoapController : MonoBehaviour
      
         if (Input.GetMouseButtonDown(0))
         {
-            startingRotation = angle;
+            //startingRotation = angle;
             rigidBody.constraints = RigidbodyConstraints.FreezeAll;
             state = state.Strenght;
         }

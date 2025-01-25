@@ -7,8 +7,9 @@ public class Player
     public PlayerColor color;
     public GameObject prefabSoap;
     public GameObject soapIntance;
+    public SoapController soapController;
     public float points;
-    public bool isYourTurn;
+    public float soapLeft;
     
 
 

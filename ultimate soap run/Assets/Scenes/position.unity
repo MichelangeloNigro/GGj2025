@@ -533,14 +533,17 @@ MonoBehaviour:
     color: 0
     prefabSoap: {fileID: 4904422243110814476, guid: c2c5ea25435d4734aaac333c9338d797, type: 3}
     soapIntance: {fileID: 0}
+    soapController: {fileID: 0}
     points: 0
-    isYourTurn: 0
+    soapLeft: 0
   - name: Pluto
     color: 1
     prefabSoap: {fileID: 4904422243110814476, guid: c2c5ea25435d4734aaac333c9338d797, type: 3}
     soapIntance: {fileID: 0}
+    soapController: {fileID: 0}
     points: 0
-    isYourTurn: 0
+    soapLeft: 0
+  maxTurns: 3
 --- !u!1 &2073793910
 GameObject:
   m_ObjectHideFlags: 0
