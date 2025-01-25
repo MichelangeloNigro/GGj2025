@@ -1,7 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+
+public enum PlaceState
+{
+    Pick,
+    Place,
+    End,
+    Wait
+}
 
 public class BuildingPlacer : MonoBehaviour
 {
@@ -17,6 +24,10 @@ public class BuildingPlacer : MonoBehaviour
     protected Ray _ray;
     protected RaycastHit _hit;
 
+    public PlaceState state = PlaceState.Pick;
+    public int numberOfPlayers = 4;
+    private int playersThatPlaced = 0;
+
     private void Awake()
     {
         instance = this; // (Singleton pattern)
@@ -26,7 +37,25 @@ public class BuildingPlacer : MonoBehaviour
 
     private void Update()
     {
-        PlaceObject();
+        if (playersThatPlaced >= numberOfPlayers)
+        {
+            state = PlaceState.End;
+            playersThatPlaced = 0;
+        }
+
+        switch (state)
+        { 
+            case PlaceState.Wait:
+                return;
+            case PlaceState.Pick:
+                return; 
+            case PlaceState.Place:
+                PlaceObject(); 
+                break; 
+            case PlaceState.End: 
+                //change game phase
+                break;
+        }
     }
 
 
@@ -34,7 +63,9 @@ public class BuildingPlacer : MonoBehaviour
     {
         _buildingPrefab = prefab;
         _PrepareBuilding();
-        EventSystem.current.SetSelectedGameObject(null); // cancel keyboard UI nav
+        EventSystem.current.SetSelectedGameObject(null);
+
+        state = PlaceState.Place;
     }
 
     protected virtual void _PrepareBuilding()
@@ -94,6 +125,8 @@ public class BuildingPlacer : MonoBehaviour
                     
                         _buildingPrefab = null;
                         _toBuild = null;
+
+                        playersThatPlaced++;
                     }
                 }
             }
