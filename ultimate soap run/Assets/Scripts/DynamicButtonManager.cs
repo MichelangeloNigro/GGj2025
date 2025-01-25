@@ -39,6 +39,7 @@ public class DynamicButtonManager : MonoBehaviour
                 Text buttonText = button.GetComponentInChildren<Text>();
                 if (buttonText != null)
                 {
+                    Debug.Log("text");
                     buttonText.text = item.name; 
                 }
 

@@ -45,9 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particlePrefab: {fileID: 967645162240975198, guid: 5f7a45c5ab849fa499e3f32d86e453ce, type: 3}
-  baseInterval: 0.3
-  maxSpeed: 1
-  minInterval: 0.1
+  interval: 0.05
   playerColor: 0
 --- !u!1 &2762158394941128972
 GameObject:
@@ -250,7 +248,7 @@ MonoBehaviour:
   state: 0
   maskFloor:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 64
   overRideWait: 0
 --- !u!64 &6050355991527315499
 MeshCollider:

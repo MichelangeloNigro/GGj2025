@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -74,7 +75,7 @@ public class BuildingPlacer : MonoBehaviour
     {
         if (_toBuild) Destroy(_toBuild);
 
-        _toBuild = Instantiate(_buildingPrefab);
+        _toBuild = Instantiate(_buildingPrefab, new Vector3(transform.position.x, transform.position.y + 20, transform.position.z), quaternion.identity);
         _toBuild.SetActive(false);
 
         BuildingManager m = _toBuild.GetComponent<BuildingManager>();
@@ -105,7 +106,7 @@ public class BuildingPlacer : MonoBehaviour
             if (Physics.Raycast(_ray, out _hit, 1000f, groundLayerMask))
             {
                 if (!_toBuild.activeSelf) _toBuild.SetActive(true);
-                _toBuild.transform.position = _hit.point;
+                _toBuild.transform.position = new Vector3(_hit.point.x, _hit.point.y + 3, _hit.point.z);
 
                 // Place the building on left mouse click
                 if (Input.GetMouseButtonDown(0))
