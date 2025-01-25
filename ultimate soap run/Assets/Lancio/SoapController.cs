@@ -120,11 +120,14 @@ public class SoapController : MonoBehaviour
                 state = state.Playing;
                 break;
             case state.Playing:
-                if (rigidBody.linearVelocity.magnitude<1) {
+                if (rigidBody.linearVelocity.magnitude < 1)
+                {
                     rigidBody.linearVelocity = Vector3.zero;
                     state = state.End;
                     break;
                 }
+                break;
+            case state.End:
                 break;
         }
     }

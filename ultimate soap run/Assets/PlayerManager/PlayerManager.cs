@@ -7,9 +7,11 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     public List<Player> playerList;
     private int turnNumbers;
     public int maxTurns;
+    public PointManager pointManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     IEnumerator Start()
     {
+        pointManager = FindObjectOfType<PointManager>();
         while (turnNumbers < maxTurns)
         {
             yield return StartCoroutine(InstantiatePlayers()); // Wait for InstantiatePlayers to complete
@@ -51,19 +53,19 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
             Debug.Log("Waiting for all soaps to reach state.End...");
             yield return null; // Wait for the next frame
         }
-        Restart();
         Debug.Log("All soaps have reached state.End! Continuing...");
+        pointManager.PrintPlayerPointPercentages();
+        Restart();
     }
     private void Restart()
     {
         foreach(Player player in playerList)
         {
             Destroy(player.soapIntance);
-            foreach (var particleSystem in FindObjectsOfType<ParticleSystem>())
-            {
-                Destroy(particleSystem.gameObject);
-            }
-        }
+foreach (var particleSystem in FindObjectsOfType<ParticleSystem>())
+{
+    Destroy(particleSystem.gameObject);
+}        }
 
     }
     private bool AllSoapsAreInEndState()

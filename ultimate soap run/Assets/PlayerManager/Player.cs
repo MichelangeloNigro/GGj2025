@@ -8,7 +8,7 @@ public class Player
     public GameObject prefabSoap;
     public GameObject soapIntance;
     public SoapController soapController;
-    public float points;
+    public PlayerPointComponent points;
     public float soapLeft;
     
 
