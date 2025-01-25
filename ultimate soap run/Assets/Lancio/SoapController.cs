@@ -28,6 +28,7 @@ public class SoapController : MonoBehaviour
     public state state=state.Position;
     //attenzione la layer mask viene contata in binario, perch� unity xd 
     public LayerMask maskFloor;
+    public bool overRideWait;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -78,6 +79,15 @@ public class SoapController : MonoBehaviour
         {
             stecca.gameObject.SetActive(false);
             strenght = Math.Clamp(startx * normalizedMouseX, -1000, startx);
+            if (overRideWait)
+            {
+                trail.SetActive(true);
+                rigidBody.AddForce(-transform.right * throwForce * throwMultiplier, ForceMode.Impulse);
+                rigidBody.constraints = RigidbodyConstraints.None;
+                state = state.End;
+
+                return;
+            }
             state = state.Waiting; 
         }
     }

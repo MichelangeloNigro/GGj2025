@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Target
+  - loading
   layers:
   - Default
   - TransparentFX
