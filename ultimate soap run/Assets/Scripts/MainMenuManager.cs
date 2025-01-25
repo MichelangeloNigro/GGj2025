@@ -52,7 +52,7 @@ public class MainMenuManager : MonoBehaviour
             if (choosingPlayer==PlayerManager.Instance.playerList.Count)
             {
                 Debug.Log("startGame");
-                SceneManager.LoadScene(1);
+                PlayerManager.Instance.Begin();
             }
             else
             {

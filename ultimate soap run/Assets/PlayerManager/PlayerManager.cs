@@ -13,7 +13,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     public DynamicButtonManager buttonManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    IEnumerator Start()
+    public IEnumerator StartGame()
     {
         pointManager = FindObjectOfType<PointManager>();
         while (turnNumbers < maxTurns)
@@ -27,15 +27,20 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
         Debug.Log("All turns are completed!");
     }
 
-
+    public void Begin()
+    {
+        StartCoroutine(StartGame());
+    }
     IEnumerator InstantiatePlayers()
     {
         foreach (Player player in playerList)
         {
             var soap = Instantiate(player.prefabSoap);
             player.soapIntance = soap;
+            soap.GetComponent<Rigidbody>().isKinematic = false;
             player.soapIntance.GetComponentInChildren<TrailGenerator>(true).playerColor = player.color;
             var controller = player.soapIntance.GetComponent<SoapController>();
+            controller.enabled = true;
             player.soapController = controller;
             // Wait until soap.state equals state.wait
             while (controller.state != state.Waiting)
