@@ -26,10 +26,11 @@ public class SoapController : MonoBehaviour
     public GameObject stecca;
     public int throwMultiplier;
     public float startingX;
+    private Rigidbody rigidBody;
 
 
-    state state;
-    //attenzione la layer mask viene contata in binario, perchè unity xd 
+    state state=state.Waiting;
+    //attenzione la layer mask viene contata in binario, perchï¿½ unity xd 
     public LayerMask maskFloor;
     //private bool isChoosingPoisition;
     //private bool isChoosingRotation;
@@ -37,7 +38,37 @@ public class SoapController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        state = state.Position;   
+        state = state.Position;
+        rigidBody = GetComponent<Rigidbody>();
+        //rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePosition;
+
+        //state = state.Rotation;
+        rigidBody.constraints = RigidbodyConstraints.FreezePositionY|RigidbodyConstraints.FreezeRotationZ|RigidbodyConstraints.FreezeRotationX;
+    }
+    public void ChoosePosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.green);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1000000000f, maskFloor))
+        {
+            transform.position = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+        }
+
+        //Vector3 mouseScreenPos = Input.mousePosition;
+        //mouseScreenPos.z = Mathf.Abs(Camera.main.transform.position.z);
+        //Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
+        //Debug.Log($"Mouse World Position: {mouseWorldPos}");
+        ////Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        ////Debug.Log(mousePos);
+        //transform.position = new Vector3(mouseWorldPos.x, transform.position.y,mouseWorldPos.z);
+        if (Input.GetMouseButtonDown(0))
+        {
+            // startingPoint= mouseWorldPos;
+            rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePosition;
+
+            state = state.Rotation;
+        }
     }
     public void rotation()
     {
@@ -45,19 +76,21 @@ public class SoapController : MonoBehaviour
         Vector3 centre = Camera.main.WorldToScreenPoint(transform.position);
         //creaiamo un vettore che va da saponetta a mouse
         Vector3 vectorLook = Input.mousePosition - centre;
-        //calcolaiamo l'angolo in gradi del vettore che abbiamo trovato (iimaginiamo un grafico cartesiano dove la saponetta è il centro e il mouse il punto, con l'atangente troviamo l'angolo che deriva dal vettore 0,0 e mouse.x,mouse.y)
+        //calcolaiamo l'angolo in gradi del vettore che abbiamo trovato (iimaginiamo un grafico cartesiano dove la saponetta ï¿½ il centro e il mouse il punto, con l'atangente troviamo l'angolo che deriva dal vettore 0,0 e mouse.x,mouse.y)
         float angle = -Mathf.Atan2(vectorLook.y, vectorLook.x) * Mathf.Rad2Deg;
         //applichiamo la rotazione alla y per rotarla
-        transform.rotation = Quaternion.Euler(transform.rotation.x, angle, transform.rotation.z);
+        transform.rotation = Quaternion.Euler(-90, angle, 0);
+     
         if (Input.GetMouseButtonDown(0))
         {
             startingRotation = angle;
+            rigidBody.constraints = RigidbodyConstraints.FreezeAll;
             state = state.Strenght;
         }
     }
     public void ChooseStrenght(float startx) {
         float normalizedMouseX = Math.Abs((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 2))*2;
-        Debug.Log(normalizedMouseX);
+        //Debug.Log(normalizedMouseX);
         throwForce = Math.Clamp(startx * normalizedMouseX, -1000, startx);
 
         // Debug.Log(normalizedMouseX);
@@ -74,27 +107,10 @@ public class SoapController : MonoBehaviour
             state = state.Moving; 
         }
     }
-    public void ChoosePosition()
-    {  
-        Ray ray= Camera.main.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(ray.origin,ray.direction*100,Color.green);
-        RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, 1000000000f, maskFloor)){
-            transform.position =new Vector3( hit.point.x,transform.position.y,hit.point.z);
-        }
-        
-            //Vector3 mouseScreenPos = Input.mousePosition;
-            //mouseScreenPos.z = Mathf.Abs(Camera.main.transform.position.z);
-            //Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
-            //Debug.Log($"Mouse World Position: {mouseWorldPos}");
-            ////Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            ////Debug.Log(mousePos);
-            //transform.position = new Vector3(mouseWorldPos.x, transform.position.y,mouseWorldPos.z);
-            if (Input.GetMouseButtonDown(0))
-        {
-           // startingPoint= mouseWorldPos;
-            state = state.Rotation;
-        }
+ public void moveToBorder()
+    {
+        rigidBody.AddForce(-transform.forward, ForceMode.Force);
+        transform.position += (transform.right)* Time.deltaTime;
     }
     void Update()
     {
@@ -115,10 +131,19 @@ public class SoapController : MonoBehaviour
             case state.Waiting:
                 break;
             case state.Moving:
-                GetComponent<Rigidbody>().AddForce(-transform.right*throwForce*throwMultiplier, ForceMode.Impulse);
-                state= state.Waiting;
+                rigidBody.constraints = RigidbodyConstraints.None;
+
+                if (transform.eulerAngles.x<=335)
+                {
+                    moveToBorder();
+                    Debug.Log("moving");
+                    break;
+                }
+                Debug.Log("throw");
+              
+                rigidBody.AddForce(-transform.right * throwForce * throwMultiplier, ForceMode.Impulse);
+                state = state.Waiting;
                 break;
         }
-
     }
 }
