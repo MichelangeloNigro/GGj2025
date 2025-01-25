@@ -9,11 +9,52 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     public int maxTurns;
     public PointManager pointManager;
     public BuildingPlacer placer;
+    private Dictionary<Color, PlayerColor> colorToPlayerColorMap;
 
     public DynamicButtonManager buttonManager;
+    private void InitializeColorDictionary()
+    {
+        colorToPlayerColorMap = new Dictionary<Color, PlayerColor>
+        {
+            { Color.red, PlayerColor.Red },
+            { Color.blue, PlayerColor.Blue },
+            { Color.green, PlayerColor.Green },
+            {new Color(1, 0.92f, 0.016f, 1), PlayerColor.Yellow },
+            { new Color(0.43f, 0, 0.404f, 1), PlayerColor.Purple },
+            { Color.black, PlayerColor.Black },
+            { new Color(1, 0.7f, 0.976f, 1), PlayerColor.Pink }
+        };
+    }
+    public Color GetColorFromPlayerColor(PlayerColor playerColor)
+    {
+        // Reverse lookup in the dictionary
+        foreach (var pair in colorToPlayerColorMap)
+        {
+            if (pair.Value == playerColor)
+            {
+                return pair.Key;
+            }
+        }
 
+        Debug.LogWarning("PlayerColor not found in the dictionary.");
+        return Color.black; // Default or fallback
+    }
+    public PlayerColor GetPlayerColorFromColor(Color color)
+    {
+        if (colorToPlayerColorMap.TryGetValue(color, out PlayerColor playerColor))
+        {
+            return playerColor;
+        }
+
+        Debug.LogWarning("Color not found in the dictionary.");
+        return PlayerColor.Black; // Default or fallback
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    IEnumerator Start()
+    private void Start()
+    {
+        InitializeColorDictionary();
+    }
+    public IEnumerator StartGame()
     {
         pointManager = FindObjectOfType<PointManager>();
         while (turnNumbers < maxTurns)
@@ -27,7 +68,10 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
         Debug.Log("All turns are completed!");
     }
 
-
+    public void Begin()
+    {
+        StartCoroutine(StartGame());
+    }
     IEnumerator InstantiatePlayers()
     {
         foreach (Player player in playerList)
@@ -36,6 +80,8 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
             player.soapIntance = soap;
             player.soapIntance.GetComponentInChildren<TrailGenerator>(true).playerColor = player.color;
             var controller = player.soapIntance.GetComponent<SoapController>();
+            soap.GetComponent<MeshRenderer>().material.color =GetColorFromPlayerColor( player.color);
+            controller.enabled = true;
             player.soapController = controller;
             // Wait until soap.state equals state.wait
             while (controller.state != state.Waiting)
