@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEditor;
 
 public class GridSystem : MonoBehaviour
 {
@@ -11,11 +12,6 @@ public class GridSystem : MonoBehaviour
     public Color occupiedColor = Color.red; // Color for cells with objects
     public GameObject prefabToSpawn;    // Prefab to spawn in the center of detected cells
     public string targetTag = "Target"; // Tag to check for objects
-
-    private void Start()
-    {
-        SpawnPrefabInTouchingCells();
-    }
 
     void OnDrawGizmos()
     {
@@ -89,6 +85,7 @@ public class GridSystem : MonoBehaviour
         }
     }
 
+    [ContextMenu("SpawnPrefab")]
     void SpawnPrefab(Vector3 position)
     {
         // Check if prefabToSpawn is set
@@ -102,3 +99,23 @@ public class GridSystem : MonoBehaviour
         Instantiate(prefabToSpawn, position, Quaternion.identity);
     }
 }
+
+#if UNITY_EDITOR
+
+[CustomEditor(typeof(GridSystem))]
+public class GridEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        GridSystem grid = (GridSystem)target;
+
+        if (GUILayout.Button("Generate Points"))
+        {
+            grid.SpawnPrefabInTouchingCells();
+        }
+    }
+}
+
+#endif
