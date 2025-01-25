@@ -28,6 +28,7 @@ public class SoapController : MonoBehaviour
     public state state=state.Position;
     //attenzione la layer mask viene contata in binario, perch� unity xd 
     public LayerMask maskFloor;
+    
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -128,6 +129,7 @@ public class SoapController : MonoBehaviour
                 }
                 break;
             case state.End:
+                
                 break;
         }
     }

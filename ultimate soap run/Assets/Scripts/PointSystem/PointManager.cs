@@ -1,13 +1,20 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PointManager : MonoBehaviour
 {
     public List<Point> pointsClaimed = new List<Point>();
-    public List<PlayerPointComponent> playerList = new List<PlayerPointComponent>();
+    public List<PlayerPointComponent> playerComponentList = new List<PlayerPointComponent>();
+    private PlayerManager playerManager;
     
     public int numberOfPoints = 0;
+
+    private void Start()
+    {
+        playerManager = FindObjectOfType<PlayerManager>();
+    }
 
     public void AddPoint(Point point)
     {
@@ -17,7 +24,7 @@ public class PointManager : MonoBehaviour
 
     public void ClearPlayerList()
     {
-        playerList.Clear();
+        playerComponentList.Clear();
     }
 
     public Dictionary<PlayerPointComponent, float> CalculatePlayerPointPercentages()
@@ -27,7 +34,7 @@ public class PointManager : MonoBehaviour
 
         // Calculate the total points of all players
         int totalPoints = 0;
-        foreach (PlayerPointComponent player in playerList)
+        foreach (PlayerPointComponent player in playerComponentList)
         {
             totalPoints += player.playerPoints.Count;
         }
@@ -40,7 +47,7 @@ public class PointManager : MonoBehaviour
         }
 
         // Calculate percentage for each player
-        foreach (PlayerPointComponent player in playerList)
+        foreach (PlayerPointComponent player in playerComponentList)
         {
             float percentage = (float)player.playerPoints.Count / totalPoints * 100;
             playerPercentages[player] = percentage;
@@ -59,11 +66,21 @@ public class PointManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void CalculateFinalScore()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        List<float> highScore = new List<float>();
+
+        foreach (var player in playerManager.playerList)
         {
-            PrintPlayerPointPercentages();
+            highScore.Add(player.totalPoints);
+        }
+        
+        highScore.Sort();
+        
+        Console.WriteLine("Sorted list (smaller to higher):");
+        foreach (float num in highScore)
+        {
+            Debug.Log(num);
         }
     }
 }

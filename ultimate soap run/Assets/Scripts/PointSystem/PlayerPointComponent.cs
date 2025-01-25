@@ -11,7 +11,7 @@ public class PlayerPointComponent : MonoBehaviour
     private void Start()
     {
         pointManager = FindObjectOfType<PointManager>();
-        pointManager.playerList.Add(this);
+        pointManager.playerComponentList.Add(this);
     }
 
     public void AddPoint(Point point)

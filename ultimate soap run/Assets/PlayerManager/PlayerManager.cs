@@ -21,6 +21,8 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
             yield return StartCoroutine(InstantiatePlayers()); // Wait for InstantiatePlayers to complete
             turnNumbers++; // Increment turnNumbers after InstantiatePlayers is done
         }
+        
+        pointManager.CalculateFinalScore();
 
         Debug.Log("All turns are completed!");
     }
@@ -96,11 +98,5 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
         }
 
         return true; // All soaps are in the "End" state
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 }
