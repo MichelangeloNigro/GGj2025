@@ -26,64 +26,9 @@ public class BuildingPlacer : MonoBehaviour
 
     private void Update()
     {
-        if (_buildingPrefab != null)
-        { // if in build mode
-
-            // right-click: cancel build mode
-            if (Input.GetMouseButtonDown(1))
-            {
-                Destroy(_toBuild);
-                _toBuild = null;
-                _buildingPrefab = null;
-                return;
-            }
-
-            // hide preview when hovering UI
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                if (_toBuild.activeSelf) _toBuild.SetActive(false);
-                return;
-            }
-            else if (!_toBuild.activeSelf) _toBuild.SetActive(true);
-
-            // rotate preview with Spacebar
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _toBuild.transform.Rotate(Vector3.up, 90);
-            }
-
-            _ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(_ray, out _hit, 1000f, groundLayerMask))
-            {
-                if (!_toBuild.activeSelf) _toBuild.SetActive(true);
-                _toBuild.transform.position = _hit.point;
-
-                if (Input.GetMouseButtonDown(0))
-                { // if left-click
-                    BuildingManager m = _toBuild.GetComponent<BuildingManager>();
-                    if (m.hasValidPlacement)
-                    {
-                        m.SetPlacementMode(PlacementMode.Fixed);
-
-                        // shift-key: chain builds
-                        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-                        {
-                            _toBuild = null; // (to avoid destruction)
-                            _PrepareBuilding();
-                        }
-                        // exit build mode
-                        else
-                        {
-                            _buildingPrefab = null;
-                            _toBuild = null;
-                        }
-                    }
-                }
-
-            }
-            else if (_toBuild.activeSelf) _toBuild.SetActive(false);
-        }
+        PlaceObject();
     }
+
 
     public void SetBuildingPrefab(GameObject prefab)
     {
@@ -102,6 +47,58 @@ public class BuildingPlacer : MonoBehaviour
         BuildingManager m = _toBuild.GetComponent<BuildingManager>();
         m.isFixed = false;
         m.SetPlacementMode(PlacementMode.Valid);
+    }
+
+    private void PlaceObject()
+    {
+        if (_buildingPrefab != null)
+        {
+            // Cancel placement
+            if (Input.GetMouseButtonDown(1))
+            {
+                Destroy(_toBuild);
+                _toBuild = null;
+                _buildingPrefab = null;
+                return;
+            }
+
+            // Ignore placement if the pointer is over a UI element
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                if (_toBuild.activeSelf) _toBuild.SetActive(false);
+                return;
+            }
+            else if (!_toBuild.activeSelf) _toBuild.SetActive(true);
+
+            // Handle rotation with the mouse scroll wheel
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (Mathf.Abs(scroll) > 0.01f) // Small threshold to detect meaningful scroll
+            {
+                _toBuild.transform.Rotate(Vector3.up, scroll * 100f); // Adjust 100f for rotation speed
+            }
+
+            // Handle placement position
+            _ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(_ray, out _hit, 1000f, groundLayerMask))
+            {
+                if (!_toBuild.activeSelf) _toBuild.SetActive(true);
+                _toBuild.transform.position = _hit.point;
+
+                // Place the building on left mouse click
+                if (Input.GetMouseButtonDown(0))
+                {
+                    BuildingManager m = _toBuild.GetComponent<BuildingManager>();
+                    if (m.hasValidPlacement)
+                    {
+                        m.SetPlacementMode(PlacementMode.Fixed);
+                    
+                        _buildingPrefab = null;
+                        _toBuild = null;
+                    }
+                }
+            }
+            else if (_toBuild.activeSelf) _toBuild.SetActive(false);
+        }
     }
 
 }
