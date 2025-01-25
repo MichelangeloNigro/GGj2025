@@ -3,6 +3,7 @@ using TMPro;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
@@ -16,7 +17,7 @@ public class MainMenuManager : MonoBehaviour
     public int choosingPlayer=0;
     public TMP_InputField namefield;
     private Dictionary<Color, PlayerColor> colorToPlayerColorMap;
-
+    public GameObject spawnObj;
     public void changePanel(GameObject nextPanel)
     {
         currPanel.SetActive(false);
@@ -51,6 +52,7 @@ public class MainMenuManager : MonoBehaviour
             if (choosingPlayer==PlayerManager.Instance.playerList.Count)
             {
                 Debug.Log("startGame");
+                SceneManager.LoadScene(1);
             }
             else
             {
@@ -73,7 +75,7 @@ public class MainMenuManager : MonoBehaviour
             currSoap = soaps.Count-1;
 
         }
-       currSoapModel= Instantiate(soaps[currSoap],Vector3.zero,Quaternion.identity);
+       currSoapModel= Instantiate(soaps[currSoap],spawnObj.transform.position,Quaternion.identity);
         namesoap.text=currSoapModel.name.Replace("(Clone)","");
         PlayerManager.Instance.playerList[choosingPlayer].prefabSoap = soaps[currSoap];
     }
