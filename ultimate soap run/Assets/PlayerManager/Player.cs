@@ -10,7 +10,5 @@ public class Player
     public SoapController soapController;
     public PlayerPointComponent points;
     public float soapLeft;
-    
-
-
+    public int totalPoints;
 }

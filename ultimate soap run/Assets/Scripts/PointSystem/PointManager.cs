@@ -15,6 +15,11 @@ public class PointManager : MonoBehaviour
         numberOfPoints++;
     }
 
+    public void ClearPlayerList()
+    {
+        playerList.Clear();
+    }
+
     public Dictionary<PlayerPointComponent, float> CalculatePlayerPointPercentages()
     {
         // Dictionary to store each player's percentage
