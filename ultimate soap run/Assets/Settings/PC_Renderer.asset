@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: Posterize
   m_EditorClassIdentifier: 
   m_Active: 1
-  injectionPoint: 600
+  injectionPoint: 450
   fetchColorBuffer: 1
   requirements: 0
   passMaterial: {fileID: 2100000, guid: ec2005cb2f194ce439dbd9a3f11b9a05, type: 2}
