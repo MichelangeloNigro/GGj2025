@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec75429844894b64fb2b71f36a1d6bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rampBoost: 5
+  rampBoost: 300
 --- !u!1001 &4346913520820679635
 PrefabInstance:
   m_ObjectHideFlags: 0

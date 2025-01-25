@@ -8,7 +8,7 @@ public class Ramp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Vector3 boostDirection = other.gameObject.transform.forward * rampBoost;
+            Vector3 boostDirection = gameObject.transform.forward * rampBoost;
             other.GetComponent<Rigidbody>().AddTorque(0, 0, 500);
             other.GetComponent<Rigidbody>().AddForce(boostDirection, ForceMode.Acceleration);
         }
