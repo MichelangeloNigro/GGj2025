@@ -384,7 +384,7 @@ Transform:
   m_GameObject: {fileID: 509349412}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.73, y: 2.22, z: 1.08}
+  m_LocalPosition: {x: 4.11, y: 3.31, z: 1.08}
   m_LocalScale: {x: 0.5, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -477,13 +477,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606548282}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.035009634, y: -0.9434813, z: 0.10582837, w: 0.312118}
-  m_LocalPosition: {x: 10.83, y: 3.89, z: 15.64}
+  m_LocalRotation: {x: 0.4304593, y: -0.56098557, z: 0.4304593, w: 0.56098557}
+  m_LocalPosition: {x: 8.54, y: 12.38, z: 8.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 12.8, y: -143.39, z: 0}
+  m_LocalEulerAnglesHint: {x: 75, y: -90, z: 0}
 --- !u!114 &606548286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,6 +558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointsClaimed: []
+  playerList: []
   numberOfPoints: 0
 --- !u!4 &968352755
 Transform:
@@ -588,6 +589,7 @@ GameObject:
   - component: {fileID: 1082171858}
   - component: {fileID: 1082171863}
   - component: {fileID: 1082171864}
+  - component: {fileID: 1082171865}
   m_Layer: 0
   m_Name: soap
   m_TagString: Player
@@ -678,7 +680,7 @@ Transform:
   m_GameObject: {fileID: 1082171857}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.15, y: 2.22, z: 1.08}
+  m_LocalPosition: {x: 4.15, y: 2.22, z: 1.57}
   m_LocalScale: {x: 0.5, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -725,6 +727,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPoints: []
+--- !u!114 &1082171865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082171857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c013c327428c67e4db74f173141e4ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawShader: {fileID: 4800000, guid: d931ba7a2db9c7540a6b039617eaa794, type: 3}
+  playerFeet: {fileID: 0}
+  brushSize: 1
+  paintColor:
+    r: 1
+    g: 0
+    b: 0
+    a: 1
+  splatMap: {fileID: 0}
+  paintMaterial: {fileID: 0}
+  meshMaterial: {fileID: 0}
 --- !u!1 &1557564277
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +996,7 @@ Transform:
   m_GameObject: {fileID: 1691568587}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -1.32, z: -0.01}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1075,7 +1100,7 @@ TrailRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
@@ -1110,7 +1135,7 @@ Transform:
   m_GameObject: {fileID: 1962097911}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -1.32, z: -0.01}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1183,8 +1208,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 0, g: 0.16940022, b: 1, a: 1}
+      key1: {r: 0, g: 0.16940022, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1214,7 +1239,7 @@ TrailRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
