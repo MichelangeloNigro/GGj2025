@@ -1260,8 +1260,6 @@ AnimationClip:
   m_PPtrCurves:
   - serializedVersion: 2
     curve:
-    - time: 0
-      value: {fileID: -1880488188248130637, guid: d8574ce0acf9eb14fab79fef16b1f6e8, type: 3}
     - time: 1.5833334
       value: {fileID: 2100000, guid: b7553a578fc09fc4fb0452c0e23001c0, type: 2}
     - time: 2.2666667
@@ -1272,7 +1270,7 @@ AnimationClip:
     script: {fileID: 0}
     flags: 2
   m_SampleRate: 60
-  m_WrapMode: 0
+  m_WrapMode: 2
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}

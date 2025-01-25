@@ -119,6 +119,82 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &517002685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3097.469
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3097.469
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3097.469
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.00014083304
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.078695856
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9968971
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0017840338
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -172.828
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 1.1779938
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -189.099
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b52bebbe9828a0a4d8e949c59a6e8ed8, type: 2}
+    - target: {fileID: 919132149155446097, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      propertyPath: m_Name
+      value: Soap
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1044621889}
+  m_SourcePrefab: {fileID: 100100000, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
 --- !u!1 &649575655
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,15 +382,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8574ce0acf9eb14fab79fef16b1f6e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 99.03259
+      value: 99.04514
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8574ce0acf9eb14fab79fef16b1f6e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -179.92609
+      value: -179.69507
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8574ce0acf9eb14fab79fef16b1f6e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 2.9294071
+      value: 3.3525467
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d8574ce0acf9eb14fab79fef16b1f6e8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -349,6 +425,28 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 1119492f65dd98e4fa6f5ec5dce3479d, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 1119492f65dd98e4fa6f5ec5dce3479d, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
+--- !u!1 &1044621888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
+  m_PrefabInstance: {fileID: 517002685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &1044621889
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044621888}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 75bc3337b000f654fb23dc49995050b1, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 75bc3337b000f654fb23dc49995050b1, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -457,8 +555,8 @@ Transform:
   m_GameObject: {fileID: 1572577310}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.699842, y: 4.524798, z: 35.080524}
-  m_LocalScale: {x: 8.969, y: 8.969, z: 8.969}
+  m_LocalPosition: {x: -0.3, y: 4.5, z: 41.3}
+  m_LocalScale: {x: 13.251697, y: 8.969, z: 8.969}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -592,3 +690,4 @@ SceneRoots:
   - {fileID: 2099992966}
   - {fileID: 763159464}
   - {fileID: 1572577314}
+  - {fileID: 517002685}
