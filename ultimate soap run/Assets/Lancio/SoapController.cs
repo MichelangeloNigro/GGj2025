@@ -8,9 +8,11 @@ using UnityEngine.UIElements;
 
 enum state
 {
+    Waiting,
     Position,
     Rotation,
-    Strenght
+    Strenght,
+    Moving
 }
 public class SoapController : MonoBehaviour
 {
@@ -20,7 +22,9 @@ public class SoapController : MonoBehaviour
     private float startingRotation;
     private List<Tuple<Vector2,float>> startingPointsANDrotation = new List<Tuple<Vector2, float>>();
     private string name;
+    private float throwForce;
     public GameObject stecca;
+    public int throwMultiplier;
     public float startingX;
 
 
@@ -54,7 +58,7 @@ public class SoapController : MonoBehaviour
     public void ChooseStrenght(float startx) {
         float normalizedMouseX = Math.Abs((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 2))*2;
         Debug.Log(normalizedMouseX);
-
+        throwForce = Math.Clamp(startx * normalizedMouseX, -1000, startx);
 
         // Debug.Log(normalizedMouseX);
         // Debug.Log(normalizedMouseX);
@@ -63,6 +67,12 @@ public class SoapController : MonoBehaviour
         //Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
         //Debug.Log(Math.Min(startingX, mouseWorldPos.x));
         stecca.transform.localPosition=new Vector3(Math.Clamp(startx * normalizedMouseX,-1000,startx),  stecca.transform.localPosition.y, stecca.transform.localPosition.z);
+        if (Input.GetMouseButtonDown(0))
+        {
+            stecca.gameObject.SetActive(false);
+
+            state = state.Moving; 
+        }
     }
     public void ChoosePosition()
     {  
@@ -96,10 +106,17 @@ public class SoapController : MonoBehaviour
                 break;
             case state.Rotation:
                 rotation();
-                startingX =stecca.transform.localPosition.x;
+                startingX = stecca.transform.localPosition.x;
                 break;
             case state.Strenght:
+                stecca.gameObject.SetActive(true);
                 ChooseStrenght(startingX);
+                break;
+            case state.Waiting:
+                break;
+            case state.Moving:
+                GetComponent<Rigidbody>().AddForce(-transform.right*throwForce*throwMultiplier, ForceMode.Impulse);
+                state= state.Waiting;
                 break;
         }
 
