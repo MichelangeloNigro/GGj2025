@@ -11,4 +11,5 @@ public class Player
     public PlayerPointComponent points;
     public float soapLeft;
     public int totalPoints;
+
 }

@@ -32,7 +32,8 @@ public class SoapController : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        rigidBody.constraints = RigidbodyConstraints.FreezePositionY|RigidbodyConstraints.FreezeRotationZ|RigidbodyConstraints.FreezeRotationX;
+        rigidBody.constraints = RigidbodyConstraints.FreezeAll;
+        rigidBody.isKinematic = true;
     }
     public void ChoosePosition()
     {
@@ -41,14 +42,13 @@ public class SoapController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1000000000f, maskFloor))
         {
-            transform.position = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            transform.position = new Vector3(hit.point.x, hit.point.y+(GetComponent<MeshCollider>().bounds.size.y*4), hit.point.z);
         }
 
        
         if (Input.GetMouseButtonDown(0))
         {
             // startingPoint= mouseWorldPos;
-            rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePosition;
 
             state = state.Rotation;
         }
@@ -62,12 +62,11 @@ public class SoapController : MonoBehaviour
         //calcolaiamo l'angolo in gradi del vettore che abbiamo trovato (iimaginiamo un grafico cartesiano dove la saponetta � il centro e il mouse il punto, con l'atangente troviamo l'angolo che deriva dal vettore 0,0 e mouse.x,mouse.y)
         float angle = -Mathf.Atan2(vectorLook.y, vectorLook.x) * Mathf.Rad2Deg;
         //applichiamo la rotazione alla y per rotarla
-        transform.rotation = Quaternion.Euler(-90, angle, 0);
+        transform.rotation = Quaternion.Euler(transform.rotation.x, angle, transform.rotation.z);
      
         if (Input.GetMouseButtonDown(0))
         {
             //startingRotation = angle;
-            rigidBody.constraints = RigidbodyConstraints.FreezeAll;
             state = state.Strenght;
         }
     }
@@ -84,6 +83,7 @@ public class SoapController : MonoBehaviour
                 trail.SetActive(true);
                 rigidBody.AddForce(-transform.right * throwForce * throwMultiplier, ForceMode.Impulse);
                 rigidBody.constraints = RigidbodyConstraints.None;
+                rigidBody.isKinematic = false;
                 state = state.End;
 
                 return;
@@ -117,7 +117,7 @@ public class SoapController : MonoBehaviour
                 break;
             case state.Moving:
                 rigidBody.constraints = RigidbodyConstraints.None;
-
+                rigidBody.isKinematic = false;
                 if (transform.eulerAngles.x <= 320)
                 {
                     moveToBorder();
@@ -130,12 +130,12 @@ public class SoapController : MonoBehaviour
                 state = state.Playing;
                 break;
             case state.Playing:
-                if (rigidBody.linearVelocity.magnitude < 1)
-                {
-                    rigidBody.linearVelocity = Vector3.zero;
-                    state = state.End;
-                    break;
-                }
+                //if (rigidBody.linearVelocity.magnitude < 1)
+                //{
+                //    rigidBody.linearVelocity = Vector3.zero;
+                //    state = state.End;
+                //    break;
+                //}
                 break;
             case state.End:
                 break;

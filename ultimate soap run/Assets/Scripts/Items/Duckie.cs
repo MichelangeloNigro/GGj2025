@@ -13,7 +13,7 @@ public class Duckie : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             Vector3 impulse = Vector3.up * impulseStrength;
             rb.AddForce(impulse, ForceMode.Acceleration);
