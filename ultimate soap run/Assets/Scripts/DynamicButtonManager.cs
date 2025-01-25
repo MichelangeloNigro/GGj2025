@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class DynamicButtonManager : MonoBehaviour
     public Button[] buttons;
 
     [Header("Available Items")]
-    public List<GameObject> items; 
+    public List<GameObject> items;
 
     private int currentIndex = 0; 
     private List<GameObject> shuffledItems;
@@ -34,18 +35,38 @@ public class DynamicButtonManager : MonoBehaviour
             {
                 GameObject item = shuffledItems[i + currentIndex];
                 Button button = buttons[i];
-
                 
-                Text buttonText = button.GetComponentInChildren<Text>();
+                // Access the Text component and update the text
+                TMP_Text buttonText = button.GetComponentInChildren<TMP_Text>();
                 if (buttonText != null)
                 {
-                    Debug.Log("text");
-                    buttonText.text = item.name; 
+                    buttonText.text = item.name;
+                }
+                else
+                {
+                    Debug.LogError($"Button {i} is missing a Text component.");
                 }
 
-                button.onClick.RemoveAllListeners(); 
+                // Access the Image component and update the sprite
+                Image buttonImage = button.GetComponentInChildren<Image>();
+                Sprite itemSprite = item.GetComponentInChildren<SpriteRenderer>()?.sprite; // Assumes the item has a SpriteRenderer
+                if (buttonImage != null && itemSprite != null)
+                {
+                    buttonImage.sprite = itemSprite;
+                }
+                else if (buttonImage == null)
+                {
+                    Debug.LogError($"Button {i} is missing an Image component.");
+                }
+                else
+                {
+                    Debug.LogError($"Item {item.name} is missing a SpriteRenderer or Sprite.");
+                }
+
+                // Set up the button click event
+                button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() => AssignToBuildingPlacer(item, button));
-                button.gameObject.SetActive(true); 
+                button.gameObject.SetActive(true);
             }
             else
             {
@@ -53,7 +74,6 @@ public class DynamicButtonManager : MonoBehaviour
             }
         }
     }
-    
 
     private void AssignToBuildingPlacer(GameObject item, Button button)
     {
