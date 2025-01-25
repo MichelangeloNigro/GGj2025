@@ -129,7 +129,8 @@ public class BuildingManager : MonoBehaviour
 
     private bool _IsGround(GameObject o)
     {
-        return ((1 << o.layer) & BuildingPlacer.instance.groundLayerMask.value) != 0;
+        return ((BuildingPlacer.instance.groundLayerMask.value & (1 << o.layer)) != 0);
     }
+
 
 }

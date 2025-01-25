@@ -86,16 +86,6 @@ public class BuildingPlacer : MonoBehaviour
     {
         if (_buildingPrefab != null)
         {
-            // Cancel placement
-            if (Input.GetMouseButtonDown(1))
-            {
-                Destroy(_toBuild);
-                _toBuild = null;
-                _buildingPrefab = null;
-                return;
-            }
-
-            // Ignore placement if the pointer is over a UI element
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 if (_toBuild.activeSelf) _toBuild.SetActive(false);

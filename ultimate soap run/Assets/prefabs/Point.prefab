@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4523182126080402204}
   - component: {fileID: 8713799138763559199}
   - component: {fileID: 401067285957563263}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,4 +121,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea09f04a1d2bb7049bcbee3debb5ad31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointManager: {fileID: 0}
