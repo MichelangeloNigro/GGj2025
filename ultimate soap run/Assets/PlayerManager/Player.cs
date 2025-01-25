@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
-
-public class Player : MonoBehaviour
+[Serializable]
+public class Player 
 {
     public string name;
-    public Color color;
-    public GameObject soap;
+    public PlayerColor color;
+    public GameObject prefabSoap;
+    public GameObject soapIntance;
     public float points;
     public bool isYourTurn;
     
+
+
 }
