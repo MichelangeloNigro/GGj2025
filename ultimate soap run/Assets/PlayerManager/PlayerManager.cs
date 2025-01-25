@@ -8,6 +8,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     private int turnNumbers;
     public int maxTurns;
     public PointManager pointManager;
+    public BuildingPlacer placer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     IEnumerator Start()
     {
@@ -55,7 +56,12 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
         }
         Debug.Log("All soaps have reached state.End! Continuing...");
         pointManager.PrintPlayerPointPercentages();
+        placer.state = PlaceState.Pick;
         Restart();
+        while (placer.state != PlaceState.End)
+        {
+            yield return null;
+        }
     }
     private void Restart()
     {
