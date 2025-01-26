@@ -260,11 +260,11 @@ MonoBehaviour:
   description: "Pizza soap: it lathers, but it\u2019s not just soap! It\u2019s our
     gooey, cheesy bar, perfect for anyone who dreams of a mozzarella-scented shower.
     Because washing up can be a real pizza party!"
-  aroma: 0
-  flavor: 0
+  aroma: 4
+  flavor: 5
   faith: 0
-  shape: 0
-  colourstat: 0
+  shape: 2
+  colourstat: 3
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &6050355991527315499
 MeshCollider:
