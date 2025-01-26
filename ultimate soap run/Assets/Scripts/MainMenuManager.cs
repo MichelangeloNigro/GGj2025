@@ -36,6 +36,7 @@ public class MainMenuManager : MonoBehaviour
     
     public void changePanel(GameObject nextPanel)
     {
+        clickButton.PlayOneShot(ok);
         currPanel.SetActive(false);
         currPanel = nextPanel;
         currPanel.SetActive(true);
