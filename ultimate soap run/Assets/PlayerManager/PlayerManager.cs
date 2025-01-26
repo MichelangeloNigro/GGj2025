@@ -53,6 +53,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     private void Start()
     {
         InitializeColorDictionary();
+        StartCoroutine(StartGame());
     }
     public IEnumerator StartGame()
     {
@@ -70,7 +71,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
 
     public void Begin()
     {
-        StartCoroutine(StartGame());
+        
     }
     IEnumerator InstantiatePlayers()
     {
