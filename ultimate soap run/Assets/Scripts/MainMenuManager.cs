@@ -27,6 +27,7 @@ public class MainMenuManager : MonoBehaviour
     public List <GameObject> shapefill;
     public List<GameObject> colorfill;
     public ParticleSystem bubblestart;
+    public LayerMask uiSoap;
 
     
     public void changePanel(GameObject nextPanel)
@@ -119,6 +120,7 @@ public class MainMenuManager : MonoBehaviour
 
         }
         currSoapModel= Instantiate(soaps[currSoap], spawnObj.transform.position, soaps[currSoap].transform.rotation,spawnObj.transform);
+        currSoapModel.layer =7;
         namesoap.text=currSoapModel.name.Replace("(Clone)","");
         PlayerManager.Instance.playerList[choosingPlayer].prefabSoap = soaps[currSoap];
         description.text = soaps[currSoap].GetComponent<SoapController>().description;
