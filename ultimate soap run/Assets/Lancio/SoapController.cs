@@ -35,11 +35,13 @@ public class SoapController : MonoBehaviour
     public Color color;
     public float minPLayTime = 5f;
     public float timecur = 0;
+    
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-       
+        trail = GetComponentInChildren<TrailRenderer>();
     }
+    
     public void setColorTrail(Color color)
     {
         Gradient gradient = new Gradient();
