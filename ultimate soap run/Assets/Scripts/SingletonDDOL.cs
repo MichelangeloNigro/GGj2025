@@ -11,7 +11,6 @@ namespace Riutilizzabile
             if (instance == null)
             {
                 instance = this as T;
-                DontDestroyOnLoad(gameObject);
             }
             else
             {
