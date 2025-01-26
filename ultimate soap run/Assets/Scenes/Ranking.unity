@@ -470,7 +470,8 @@ PrefabInstance:
       value: rankingCanvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1467657218235297921, guid: 1a0ac7a985e02e34b8d127ba4b7df6d2, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a0ac7a985e02e34b8d127ba4b7df6d2, type: 3}
