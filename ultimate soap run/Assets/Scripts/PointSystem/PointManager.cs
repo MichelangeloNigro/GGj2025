@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class PointManager : MonoBehaviour
 {
+    [SerializeField] private GameObject finalCanvas;
+    [SerializeField] private GameObject finalSprite;
     public List<Point> pointsClaimed = new List<Point>();
     public List<PlayerPointComponent> playerComponentList = new List<PlayerPointComponent>();
     private PlayerManager playerManager;
@@ -68,19 +71,18 @@ public class PointManager : MonoBehaviour
 
     public void CalculateFinalScore()
     {
-        List<float> highScore = new List<float>();
+            if (PlayerManager.Instance == null || PlayerManager.Instance.playerList == null || PlayerManager.Instance.playerList.Count == 0)
+            {
+                Debug.LogWarning("PlayerManager or playerList is not set up correctly or empty.");
+                return;
+            }
 
-        foreach (var player in playerManager.playerList)
-        {
-            highScore.Add(player.totalPoints);
-        }
-        
-        highScore.Sort();
-        
-        Console.WriteLine("Sorted list (smaller to higher):");
-        foreach (float num in highScore)
-        {
-            Debug.Log(num);
-        }
+            List<Player> sortedPlayerList = new List<Player>(PlayerManager.Instance.playerList);
+            sortedPlayerList.Sort((player1, player2) => player2.totalPoints.CompareTo(player1.totalPoints));
+
+            Player highestScorer = sortedPlayerList[0];
+            finalCanvas.SetActive(true);
+
+            finalSprite.gameObject.GetComponent<Image>().sprite = highestScorer.sprite;
     }
 }
