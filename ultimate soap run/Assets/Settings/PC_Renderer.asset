@@ -87,8 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
   m_Name: Posterize
   m_EditorClassIdentifier: 
-  m_Active: 1
-  injectionPoint: 450
+  m_Active: 0
+  injectionPoint: 600
   fetchColorBuffer: 1
   requirements: 0
   passMaterial: {fileID: 2100000, guid: ec2005cb2f194ce439dbd9a3f11b9a05, type: 2}
