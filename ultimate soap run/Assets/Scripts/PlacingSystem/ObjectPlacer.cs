@@ -17,9 +17,12 @@ public enum PlaceState
 public class BuildingPlacer : MonoBehaviour
 {
     public GameObject pickingCanvas;
+    public Sprite defaultSprite;
     [Header("Point canvas")]
     public GameObject pointCanvas;
     public GameObject[] pointDisplays;
+    public TMP_Text[] allNames;
+    public TMP_Text[] allPoints;
     
     public static BuildingPlacer instance; // (Singleton pattern)
 
@@ -78,10 +81,13 @@ public class BuildingPlacer : MonoBehaviour
         {
             for (int i = 0; i < PlayerManager.Instance.playerList.Count; i++)
             {
-                pointDisplays[i].GetComponentInChildren<SpriteRenderer>().sprite =
-                    PlayerManager.Instance.playerList[i].sprite;
-                pointDisplays[i].GetComponentInChildren<TMP_Text>().text =
-                    PlayerManager.Instance.playerList[i].totalPoints.ToString();
+                var currentPlayer = PlayerManager.Instance.playerList[i];
+                if (currentPlayer.sprite != null)
+                    pointDisplays[i].GetComponent<Image>().sprite = currentPlayer.sprite;
+                else
+                    pointDisplays[i].GetComponent<Image>().sprite = defaultSprite;
+                allNames[i].text = currentPlayer.name;
+                allPoints[i].text = currentPlayer.totalPoints.ToString();
             }
 
             pointsSet = true;

@@ -68,7 +68,6 @@ public class MainMenuManager : MonoBehaviour
 
             }
             namefield.text = (choosingPlayer + 1).ToString();
-
         }
     }
     public void ChangeSoap(int i)
