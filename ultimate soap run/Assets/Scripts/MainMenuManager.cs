@@ -27,6 +27,8 @@ public class MainMenuManager : MonoBehaviour
     public List <GameObject> shapefill;
     public List<GameObject> colorfill;
     public ParticleSystem bubblestart;
+
+    
     public void changePanel(GameObject nextPanel)
     {
         currPanel.SetActive(false);
@@ -125,6 +127,7 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         InitializeColorDictionary();
+        SoundEngine.Instance.PlayOST("Player");
 
     }
     public void SetName(string text)
