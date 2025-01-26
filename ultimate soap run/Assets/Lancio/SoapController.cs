@@ -29,6 +29,15 @@ public class SoapController : MonoBehaviour
     //attenzione la layer mask viene contata in binario, perch� unity xd 
     public LayerMask maskFloor;
     public bool overRideWait;
+    [TextArea]
+    public string description;
+    public int aroma;
+    public int flavor;
+    public int faith;
+    public int shape;
+    public int colourstat;
+    public Color color;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();

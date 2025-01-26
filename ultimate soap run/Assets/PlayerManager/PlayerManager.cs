@@ -84,6 +84,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
             var controller = player.soapIntance.GetComponent<SoapController>();
             soap.GetComponent<MeshRenderer>().material.color =GetColorFromPlayerColor( player.color);
             controller.setColorTrail(GetColorFromPlayerColor(player.color));
+            controller.color = GetColorFromPlayerColor(player.color);
             controller.enabled = true;
             player.soapController = controller;
             // Wait until soap.state equals state.wait

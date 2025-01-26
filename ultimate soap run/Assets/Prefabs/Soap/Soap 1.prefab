@@ -257,6 +257,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   overRideWait: 0
+  description: It's a basic soap bar-nothing fancy, but it works. Lathers well, smells
+    decent, and lasts a resonable amount of time if you don't leave it soaking. not
+    groundbreaking. but solidly reliable.
+  aroma: 3
+  flavor: 3
+  faith: 3
+  shape: 3
+  colourstat: 3
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &6050355991527315499
 MeshCollider:
   m_ObjectHideFlags: 0
