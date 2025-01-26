@@ -46,7 +46,6 @@ public class BuildingPlacer : MonoBehaviour
         instance = this; // (Singleton pattern)
         _mainCamera = Camera.main;
         _buildingPrefab = null;
-        numberOfPlayers = PlayerManager.Instance.playerList.Count;
         state = PlaceState.End;
     }
 
@@ -105,8 +104,11 @@ public class BuildingPlacer : MonoBehaviour
 
     private void OpenPickMenu()
     {
-        if(!pickingCanvas.activeSelf)
+        if (!pickingCanvas.activeSelf)
+        {
             pickingCanvas.SetActive(true);
+            numberOfPlayers = PlayerManager.Instance.playerList.Count;
+        }
     }
 
     public void SetBuildingPrefab(GameObject prefab)
