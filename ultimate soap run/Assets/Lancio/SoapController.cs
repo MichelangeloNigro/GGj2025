@@ -113,7 +113,7 @@ public class SoapController : MonoBehaviour
     }
  public void moveToBorder()
     {
-        rigidBody.AddForce(-transform.forward, ForceMode.Force);
+        //rigidBody.AddForce(-transform.forward, ForceMode.Force);
         transform.position += (transform.right)* Time.deltaTime;
     }
     void Update()
