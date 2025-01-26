@@ -9,15 +9,15 @@ using UnityEngine.UI;
 public class MainMenuManager : MonoBehaviour
 {
     public GameObject currPanel;
-    public Dropdown dropdown;
     public List<GameObject> soaps;
     private int currSoap=0;
     public GameObject currSoapModel;
     public TMP_Text namesoap;
     public int choosingPlayer=0;
-    public TMP_InputField namefield;
+    public TMP_Text namefield;
     private Dictionary<Color, PlayerColor> colorToPlayerColorMap;
     public GameObject spawnObj;
+    public TMP_Text description;
     public void changePanel(GameObject nextPanel)
     {
         currPanel.SetActive(false);
@@ -40,13 +40,13 @@ public class MainMenuManager : MonoBehaviour
         if(currSoapModel != null)
         {
             GameObject pressedButton = EventSystem.current.currentSelectedGameObject;
-            PlayerManager.Instance.playerList[choosingPlayer].color = GetPlayerColorFromColor(pressedButton.GetComponent<Image>().color);
-            currSoapModel.GetComponent<MeshRenderer>().material.color =pressedButton.GetComponent<Image>().color ;
+            PlayerManager.Instance.playerList[choosingPlayer].color = GetPlayerColorFromColor(pressedButton.GetComponent<Button>().colors.disabledColor);
+            currSoapModel.GetComponent<MeshRenderer>().material.color = pressedButton.GetComponent<Button>().colors.disabledColor;
         }
     }
     public void NextPlayer()
     {
-        if (PlayerManager.Instance.playerList[choosingPlayer].prefabSoap!=null && PlayerManager.Instance.playerList[choosingPlayer].color!=null && PlayerManager.Instance.playerList[choosingPlayer].name != null)
+        if (PlayerManager.Instance.playerList[choosingPlayer].prefabSoap!=null && PlayerManager.Instance.playerList[choosingPlayer].color!=null)
         {
             choosingPlayer++;
             if (choosingPlayer==PlayerManager.Instance.playerList.Count)
@@ -59,9 +59,9 @@ public class MainMenuManager : MonoBehaviour
             else
             {
                 Destroy(currSoapModel);
-                namefield.text = "Enter your Name...";
 
             }
+            namefield.text = (choosingPlayer + 1).ToString();
 
         }
     }
@@ -77,9 +77,10 @@ public class MainMenuManager : MonoBehaviour
             currSoap = soaps.Count-1;
 
         }
-       currSoapModel= Instantiate(soaps[currSoap], spawnObj.transform.position, soaps[currSoap].transform.rotation);
+        currSoapModel= Instantiate(soaps[currSoap], spawnObj.transform.position, soaps[currSoap].transform.rotation);
         namesoap.text=currSoapModel.name.Replace("(Clone)","");
         PlayerManager.Instance.playerList[choosingPlayer].prefabSoap = soaps[currSoap];
+        description.text = soaps[currSoap].GetComponent<SoapController>().description;
     }
     private void Start()
     {
@@ -94,13 +95,14 @@ public class MainMenuManager : MonoBehaviour
     {
         colorToPlayerColorMap = new Dictionary<Color, PlayerColor>
         {
-            { Color.red, PlayerColor.Red },
-            { Color.blue, PlayerColor.Blue },
-            { Color.green, PlayerColor.Green },
-            {new Color(1, 0.92f, 0.016f, 1), PlayerColor.Yellow },
-            { new Color(0.43f, 0, 0.404f, 1), PlayerColor.Purple },
-            { Color.black, PlayerColor.Black },
-            { new Color(1, 0.7f, 0.976f, 1), PlayerColor.Pink }
+            { new Color(0.93f, 0.22f, 0.19f, 1), PlayerColor.Red },
+            { new Color(0.46f, 0.71f, 0.87f, 1), PlayerColor.Blue },
+            { new Color(0.50f, 0.78f, 0.48f, 1), PlayerColor.Green },
+            {new Color(0.87f, 0.70f, 0.45f, 1), PlayerColor.Yellow },
+            { new Color(0.70f, 0.49f, 0.78f, 1), PlayerColor.Purple },
+            {  new Color(0.40f, 0.94f, 0.92f, 1), PlayerColor.celeste },
+            { new Color(0.87f, 0.36f, 0.67f, 1), PlayerColor.Pink },
+            { Color.black,PlayerColor.Black}
         };
     }
 

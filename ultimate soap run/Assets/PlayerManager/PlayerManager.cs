@@ -16,13 +16,14 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     {
         colorToPlayerColorMap = new Dictionary<Color, PlayerColor>
         {
-            { Color.red, PlayerColor.Red },
-            { Color.blue, PlayerColor.Blue },
-            { Color.green, PlayerColor.Green },
-            {new Color(1, 0.92f, 0.016f, 1), PlayerColor.Yellow },
-            { new Color(0.70f, 0, 0.404f, 1), PlayerColor.Purple },
-            { Color.black, PlayerColor.Black },
-            { new Color(0.87f, 0.49f, 0.78f, 1), PlayerColor.Pink }
+            { new Color(0.93f, 0.22f, 0.19f, 1), PlayerColor.Red },
+            { new Color(0.46f, 0.71f, 0.87f, 1), PlayerColor.Blue },
+            { new Color(0.50f, 0.78f, 0.48f, 1), PlayerColor.Green },
+            {new Color(0.87f, 0.70f, 0.45f, 1), PlayerColor.Yellow },
+            { new Color(0.70f, 0.49f, 0.78f, 1), PlayerColor.Purple },
+            {  new Color(0.40f, 0.94f, 0.92f, 1), PlayerColor.celeste },
+            { new Color(0.87f, 0.36f, 0.67f, 1), PlayerColor.Pink },
+            { Color.black,PlayerColor.Black}
         };
     }
     public Color GetColorFromPlayerColor(PlayerColor playerColor)
