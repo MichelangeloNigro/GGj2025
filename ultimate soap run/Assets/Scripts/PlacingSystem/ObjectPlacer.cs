@@ -52,8 +52,6 @@ public class BuildingPlacer : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(state);
-        
         switch (state)
         { 
             case PlaceState.ScoreBoard:
@@ -87,6 +85,7 @@ public class BuildingPlacer : MonoBehaviour
             for (int i = 0; i < PlayerManager.Instance.playerList.Count; i++)
             {
                 var currentPlayer = PlayerManager.Instance.playerList[i];
+                
                 if (currentPlayer.sprite != null)
                     pointDisplays[i].GetComponent<Image>().sprite = currentPlayer.sprite;
                 else
@@ -112,6 +111,7 @@ public class BuildingPlacer : MonoBehaviour
     {
         if (!pickingCanvas.activeSelf)
         {
+            pointsSet = false;
             pickingCanvas.SetActive(true);
             numberOfPlayers = PlayerManager.Instance.playerList.Count;
         }
