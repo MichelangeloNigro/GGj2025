@@ -9,17 +9,71 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     public int maxTurns;
     public PointManager pointManager;
     public BuildingPlacer placer;
+    private Dictionary<Color, PlayerColor> colorToPlayerColorMap;
 
     public DynamicButtonManager buttonManager;
+    private void InitializeColorDictionary()
+    {
+        colorToPlayerColorMap = new Dictionary<Color, PlayerColor>
+        {
+            { new Color(0.93f, 0.22f, 0.19f, 1), PlayerColor.Red },
+            { new Color(0.46f, 0.71f, 0.87f, 1), PlayerColor.Blue },
+            { new Color(0.50f, 0.78f, 0.48f, 1), PlayerColor.Green },
+            {new Color(0.87f, 0.70f, 0.45f, 1), PlayerColor.Yellow },
+            { new Color(0.70f, 0.49f, 0.78f, 1), PlayerColor.Purple },
+            {  new Color(0.40f, 0.94f, 0.92f, 1), PlayerColor.celeste },
+            { new Color(0.87f, 0.36f, 0.67f, 1), PlayerColor.Pink },
+            { Color.black,PlayerColor.Black}
+        };
+    }
+    public Color GetColorFromPlayerColor(PlayerColor playerColor)
+    {
+        // Reverse lookup in the dictionary
+        foreach (var pair in colorToPlayerColorMap)
+        {
+            if (pair.Value == playerColor)
+            {
+                return pair.Key;
+            }
+        }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    IEnumerator Start()
+        Debug.LogWarning("PlayerColor not found in the dictionary.");
+        return Color.black; // Default or fallback
+    }
+    public PlayerColor GetPlayerColorFromColor(Color color)
+    {
+        if (colorToPlayerColorMap.TryGetValue(color, out PlayerColor playerColor))
+        {
+            return playerColor;
+        }
+
+        Debug.LogWarning("Color not found in the dictionary.");
+        return PlayerColor.Black; // Default or fallback
+    }
+    
+    private void Start()
+    {
+        InitializeColorDictionary();
+        //StartCoroutine(StartGame());
+
+    }
+    public IEnumerator StartGame()
     {
         pointManager = FindObjectOfType<PointManager>();
         while (turnNumbers < maxTurns)
         {
             yield return StartCoroutine(InstantiatePlayers()); // Wait for InstantiatePlayers to complete
             turnNumbers++; // Increment turnNumbers after InstantiatePlayers is done
+            if(turnNumbers >= maxTurns)
+                break;
+            
+            placer.state = PlaceState.ScoreBoard;
+            buttonManager.StartPlacing();
+            
+            while (placer.state != PlaceState.End)
+            {
+                yield return null;
+            }
         }
         
         pointManager.CalculateFinalScore();
@@ -27,7 +81,10 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
         Debug.Log("All turns are completed!");
     }
 
-
+    public void Begin()
+    {
+        StartCoroutine(StartGame());
+    }
     IEnumerator InstantiatePlayers()
     {
         foreach (Player player in playerList)
@@ -36,6 +93,10 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
             player.soapIntance = soap;
             player.soapIntance.GetComponentInChildren<TrailGenerator>(true).playerColor = player.color;
             var controller = player.soapIntance.GetComponent<SoapController>();
+            soap.GetComponent<MeshRenderer>().material.color =GetColorFromPlayerColor( player.color);
+            controller.setColorTrail(GetColorFromPlayerColor(player.color));
+            controller.color = GetColorFromPlayerColor(player.color);
+            controller.enabled = true;
             player.soapController = controller;
             // Wait until soap.state equals state.wait
             while (controller.state != state.Waiting)
@@ -62,13 +123,8 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
 
         Debug.Log("All soaps have reached state.End! Continuing...");
         pointManager.PrintPlayerPointPercentages();
-        placer.state = PlaceState.Pick;
+        
         Restart();
-        buttonManager.StartPlacing();
-        while (placer.state != PlaceState.End)
-        {
-            yield return null;
-        }
     }
 
     private void Restart()

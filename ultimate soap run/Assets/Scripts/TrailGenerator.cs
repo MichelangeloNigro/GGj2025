@@ -10,8 +10,9 @@ public enum PlayerColor
     Green,
     Yellow,
     Purple,
-    Black,
+    celeste,
     Pink,
+    Black
 };
 public class TrailGenerator : MonoBehaviour
 {
@@ -52,25 +53,29 @@ public class TrailGenerator : MonoBehaviour
     {
         switch (playerColor)
         {
+            
             case PlayerColor.Red:
-                return Color.red;
+                return new Color(0.93f, 0.22f, 0.19f, 1);
             case PlayerColor.Blue:
-                return Color.blue;
+                return new Color(0.46f, 0.71f, 0.87f, 1);
             case PlayerColor.Green:
-                return Color.green;
+                return new Color(0.50f, 0.78f, 0.48f, 1);
                 break;
             case PlayerColor.Yellow:
-                return Color.yellow;
+            return new Color(0.87f, 0.70f, 0.45f, 1);
                 break;
             case PlayerColor.Purple:
-                return new Color(0.43f,0,0.404f,1);
+                return new Color(0.70f, 0.49f, 0.78f, 1);
                 break;
             case PlayerColor.Black:
                 return Color.black;
                 break;
             case PlayerColor.Pink:
-                return new Color(1,0.7f,0.976f,1);
+                return new Color(0.87f, 0.36f, 0.67f, 1);
                 break;
+            case PlayerColor.celeste:
+            return new Color(0.40f, 0.94f, 0.92f, 1);
+
         }
 
         return Color.black;

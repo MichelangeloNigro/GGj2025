@@ -23,4 +23,9 @@ public class PlayerPointComponent : MonoBehaviour
     {
         playerPoints.Remove(point);
     }
+
+    private void OnDisable()
+    {
+        pointManager.playerComponentList.Remove(this);
+    }
 }
