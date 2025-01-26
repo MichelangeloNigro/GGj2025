@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 9174682566253407773}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -24.001364, y: -5.2774487, z: 9.644327}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.20000002, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stecca: {fileID: 1141809230244209561}
-  throwMultiplier: 1000
+  throwMultiplier: 1
   startingX: 0
   trail: {fileID: 9174682566253407773}
   state: 0

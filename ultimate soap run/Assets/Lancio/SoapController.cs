@@ -32,8 +32,7 @@ public class SoapController : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        rigidBody.constraints = RigidbodyConstraints.FreezeAll;
-        rigidBody.isKinematic = true;
+        rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
     }
     public void ChoosePosition()
     {
@@ -49,6 +48,7 @@ public class SoapController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // startingPoint= mouseWorldPos;
+            rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePosition;
 
             state = state.Rotation;
         }
@@ -66,6 +66,8 @@ public class SoapController : MonoBehaviour
      
         if (Input.GetMouseButtonDown(0))
         {
+            rigidBody.constraints = RigidbodyConstraints.FreezeAll;
+
             //startingRotation = angle;
             state = state.Strenght;
         }
@@ -117,7 +119,6 @@ public class SoapController : MonoBehaviour
                 break;
             case state.Moving:
                 rigidBody.constraints = RigidbodyConstraints.None;
-                rigidBody.isKinematic = false;
                 if (transform.eulerAngles.x <= 320)
                 {
                     moveToBorder();
