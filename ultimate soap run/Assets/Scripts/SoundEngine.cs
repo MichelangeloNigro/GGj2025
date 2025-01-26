@@ -11,42 +11,54 @@ using UnityEngine;
 public class SoundEngine : MonoBehaviour
 {
     const string BackgroudKey = "OST";
-    private static readonly Lazy<SoundEngine> _instance = new Lazy<SoundEngine>(() => new SoundEngine());
     /// <summary>
-    /// Proprietà per l'istanza della classe.
+    /// Lista delle clip del gioco
     /// </summary>
-    public static SoundEngine Instance => _instance.Value;
+    private IEnumerable<AudioClip> clips { get; set; }
+    /// <summary>
+    /// Collector delle OST
+    /// </summary>
+    private List<AudioSource> OSTSources { get; set; } = new List<AudioSource>();
+
     /// <summary>
     /// Costruttore privato.
     /// </summary>
-    private SoundEngine()
+    private SoundEngine() { }
+
+    void Awake()
     {
         clips = Resources.LoadAll<AudioClip>("Audio");
-        backgroundSources = from c in clips where c.name.StartsWith(BackgroudKey) select new AudioSource { clip = c, name = c.name.Replace($"{BackgroudKey}_", "") };
+        foreach (var clip in clips.Where(c => c.name.StartsWith(BackgroudKey)))
+        {
+            SetupOST(clip);
+        }
+        DontDestroyOnLoad(gameObject);
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        foreach (AudioSource source in backgroundSources)
-        {
-            source.loop = true;
-            source.volume = 0f;
-            source.Play();
-        }
+        foreach (AudioSource source in OSTSources) { source.Play(); }
     }
     // Update is called once per frame
     void Update() { }
-    private IEnumerable<AudioSource> backgroundSources { get; set; }
-    private IEnumerable<AudioClip> clips { get; set; }
+
     /// <summary>
     /// Metodo per la riproduzione dell'audio di background.
     /// </summary>
-    public void PlayBackground(string clipName)
+    public void PlayOST(string clipName)
     {
-        var playing = backgroundSources.FirstOrDefault(c => c.volume == 1f);
-        if (playing != null) playing.volume = 0f; else Debug.Log("Nessun audio di background in riproduzione.");
-        var clip = backgroundSources.FirstOrDefault(c => c.name == clipName);
+        StopOST();
+        var clip = OSTSources.FirstOrDefault(c => c.name.Replace("OST_", "").ToLower() == clipName.ToLower());
         if (clip != null) clip.volume = 1f; else Debug.Log("Impossibile riprodurre l'audio di background " + clipName + ". L'audio non esiste.");
+    }
+    /// <summary>
+    /// Metodo per interrompere la riproduzione dell'audio di background.
+    /// </summary>
+    public void StopOST()
+    {
+        var playing = OSTSources.FirstOrDefault(c => c.volume == 1f);
+        if (playing != null) playing.volume = 0f; else Debug.Log("Nessun audio di background in riproduzione.");
     }
     /// <summary>
     /// Metodo per la gestione dell'audio degli effetti sonori.
@@ -57,6 +69,31 @@ public class SoundEngine : MonoBehaviour
 
     /// <summary>
     /// Classe di supporto per la gestione dell'audio.
+
+    /// <summary>
+    /// Imposta il Game Object come audio source per l'ost
+    /// </summary>
+    /// <param name="clip"></param>
+    private void SetupOST(AudioClip clip)
+    {
+        var obj = new GameObject();
+        obj.name = clip.name.ToUpper();
+        obj.transform.parent = transform;
+        var source = obj.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.loop = true;
+        source.volume = 0f;
+        OSTSources.Add(source);
+    }
+
+    public static SoundEngine Instance
+    {
+        get
+        {
+            return FindObjectOfType(typeof(SoundEngine)).GetComponent<SoundEngine>();
+        }
+    }
+
     /// </summary>
     public class AudioPlayer
     {

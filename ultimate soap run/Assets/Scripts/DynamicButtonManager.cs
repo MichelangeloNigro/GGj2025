@@ -35,17 +35,6 @@ public class DynamicButtonManager : MonoBehaviour
             {
                 GameObject item = shuffledItems[i + currentIndex];
                 Button button = buttons[i];
-                
-                // Access the Text component and update the text
-                TMP_Text buttonText = button.GetComponentInChildren<TMP_Text>();
-                if (buttonText != null)
-                {
-                    buttonText.text = item.name;
-                }
-                else
-                {
-                    Debug.LogError($"Button {i} is missing a Text component.");
-                }
 
                 // Access the Image component and update the sprite
                 Image buttonImage = button.GetComponentInChildren<Image>();

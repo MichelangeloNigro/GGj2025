@@ -260,11 +260,11 @@ MonoBehaviour:
   description: "because sometimes life\u2019s too edgy for square or round. Perfectly
     shaped for slipping out of your hands and teaching you humility in the shower.
     Smooth, like your worst pickup line."
-  aroma: 0
-  flavor: 0
-  faith: 0
-  shape: 0
-  colourstat: 0
+  aroma: 3
+  flavor: 1
+  faith: 4
+  shape: 1
+  colourstat: 1
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &6050355991527315499
 MeshCollider:

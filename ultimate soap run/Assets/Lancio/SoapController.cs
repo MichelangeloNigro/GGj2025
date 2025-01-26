@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public enum state
 {
@@ -32,7 +33,8 @@ public class SoapController : MonoBehaviour
     public int shape;
     public int colourstat;
     public Color color;
-
+    public float minPLayTime = 5f;
+    public float timecur = 0;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -100,7 +102,6 @@ public class SoapController : MonoBehaviour
             strenght = Math.Clamp(startx * normalizedMouseX, -1000, startx);
             if (overRideWait)
             {
-                trail.enabled=true;
                 rigidBody.AddForce(-transform.right * throwForce * throwMultiplier, ForceMode.Impulse);
                 rigidBody.constraints = RigidbodyConstraints.None;
                 rigidBody.isKinematic = false;
@@ -137,7 +138,7 @@ public class SoapController : MonoBehaviour
                 break;
             case state.Moving:
                 rigidBody.constraints = RigidbodyConstraints.None;
-                if (transform.eulerAngles.x <= 320)
+                if (transform.eulerAngles.x <= 315)
                 {
                     moveToBorder();
                     Debug.Log("moving");
@@ -146,10 +147,12 @@ public class SoapController : MonoBehaviour
                 Debug.Log("throw");
                 trail.enabled = true;
                 rigidBody.AddForce(-transform.right * throwForce * throwMultiplier, ForceMode.Impulse);
+                timecur = 0;
                 state = state.Playing;
                 break;
             case state.Playing:
-                if (rigidBody.linearVelocity.magnitude < 1)
+                timecur += Time.deltaTime;
+                if (rigidBody.linearVelocity.magnitude < 0.2&&timecur>minPLayTime)
                 {
                     rigidBody.linearVelocity = Vector3.zero;
                     state = state.End;

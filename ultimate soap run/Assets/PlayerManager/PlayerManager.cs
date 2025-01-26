@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -87,6 +88,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     }
     IEnumerator InstantiatePlayers()
     {
+        SoundEngine.Instance.PlayOST("Setup");
         foreach (Player player in playerList)
         {
             var soap = Instantiate(player.prefabSoap);
@@ -112,6 +114,16 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
 
         foreach (Player player in playerList)
         {
+            if (maxTurns - turnNumbers == 1)
+            {
+                SoundEngine.Instance.PlayOST("Play2");
+
+
+            }
+            else
+            {
+                SoundEngine.Instance.PlayOST("Play1");
+            }
             player.soapIntance.GetComponent<SoapController>().state = state.Moving;
         }
 
@@ -122,6 +134,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
         }
 
         Debug.Log("All soaps have reached state.End! Continuing...");
+        SoundEngine.Instance.PlayOST("Setup");
         pointManager.PrintPlayerPointPercentages();
         
         Restart();
