@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particlePrefab: {fileID: 967645162240975198, guid: 5f7a45c5ab849fa499e3f32d86e453ce, type: 3}
-  interval: 0.05
+  interval: 5
   playerColor: 0
---- !u!1 &2762158394941128972
+--- !u!1 &3334784646612270266
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,9 +55,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 910581052297493129}
-  - component: {fileID: 1044259527197988963}
-  - component: {fileID: 5694464803306903050}
+  - component: {fileID: 6754696217585804197}
+  - component: {fileID: 1509360903355734134}
+  - component: {fileID: 1436317012821702181}
   m_Layer: 0
   m_Name: spinta
   m_TagString: Untagged
@@ -65,36 +65,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &910581052297493129
+--- !u!4 &6754696217585804197
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2762158394941128972}
+  m_GameObject: {fileID: 3334784646612270266}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.015161076, y: 0, z: 0}
-  m_LocalScale: {x: 0.0021511002, y: 0.0010402937, z: 0.0010817454}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.0135, y: 0.00191, z: 0}
+  m_LocalScale: {x: 0.22999999, y: 0.22999999, z: 0.22999999}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5718395766705576374}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!33 &1044259527197988963
+  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
+--- !u!33 &1509360903355734134
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2762158394941128972}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5694464803306903050
+  m_GameObject: {fileID: 3334784646612270266}
+  m_Mesh: {fileID: 2484297765696658124, guid: f46ee4dfb87b57b42992ab684fb90c9c, type: 3}
+--- !u!23 &1436317012821702181
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2762158394941128972}
+  m_GameObject: {fileID: 3334784646612270266}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -111,7 +111,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 978e9baa68376de4eb94452e30ba2eda, type: 2}
+  - {fileID: 2100000, guid: c6132d413aa453a4e8ba418028abe6d5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,7 +210,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 910581052297493129}
+      addedObject: {fileID: 6754696217585804197}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
       insertIndex: -1
       addedObject: {fileID: 609580015921191945}
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903aa75c3b8888b48bebe9cc7bac4dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stecca: {fileID: 2762158394941128972}
+  stecca: {fileID: 3334784646612270266}
   throwMultiplier: 1000
   startingX: 0
   trail: {fileID: 768635685734615075}
@@ -299,9 +299,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &9155980261387729216
 MonoBehaviour:

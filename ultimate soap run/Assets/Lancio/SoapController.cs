@@ -32,7 +32,6 @@ public class SoapController : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
     }
     public void ChoosePosition()
     {
@@ -48,7 +47,6 @@ public class SoapController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // startingPoint= mouseWorldPos;
-            rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePosition;
 
             state = state.Rotation;
         }
@@ -131,12 +129,12 @@ public class SoapController : MonoBehaviour
                 state = state.Playing;
                 break;
             case state.Playing:
-                //if (rigidBody.linearVelocity.magnitude < 1)
-                //{
-                //    rigidBody.linearVelocity = Vector3.zero;
-                //    state = state.End;
-                //    break;
-                //}
+                if (rigidBody.linearVelocity.magnitude < 1)
+                {
+                    rigidBody.linearVelocity = Vector3.zero;
+                    state = state.End;
+                    break;
+                }
                 break;
             case state.End:
                 break;
