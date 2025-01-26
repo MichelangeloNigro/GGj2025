@@ -10,7 +10,7 @@ public enum PlayerColor
     Green,
     Yellow,
     Purple,
-    Black,
+    celeste,
     Pink,
 };
 public class TrailGenerator : MonoBehaviour

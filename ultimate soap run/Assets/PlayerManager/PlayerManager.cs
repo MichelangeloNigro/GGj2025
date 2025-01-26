@@ -20,9 +20,9 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
             { Color.blue, PlayerColor.Blue },
             { Color.green, PlayerColor.Green },
             {new Color(1, 0.92f, 0.016f, 1), PlayerColor.Yellow },
-            { new Color(0.43f, 0, 0.404f, 1), PlayerColor.Purple },
+            { new Color(0.70f, 0, 0.404f, 1), PlayerColor.Purple },
             { Color.black, PlayerColor.Black },
-            { new Color(1, 0.7f, 0.976f, 1), PlayerColor.Pink }
+            { new Color(0.87f, 0.49f, 0.78f, 1), PlayerColor.Pink }
         };
     }
     public Color GetColorFromPlayerColor(PlayerColor playerColor)
@@ -53,7 +53,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     private void Start()
     {
         InitializeColorDictionary();
-        StartCoroutine(StartGame());
+        //StartCoroutine(StartGame());
 
     }
     public IEnumerator StartGame()
