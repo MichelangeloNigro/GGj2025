@@ -16,6 +16,7 @@ public enum state
     Moving,
     End
 }
+
 public class SoapController : MonoBehaviour
 {
     private float strenght;
@@ -25,14 +26,18 @@ public class SoapController : MonoBehaviour
     public float startingX;
     private Rigidbody rigidBody;
     public GameObject trail;
-    public state state=state.Position;
+
+    public state state = state.Position;
+
     //attenzione la layer mask viene contata in binario, perch� unity xd 
     public LayerMask maskFloor;
     public bool overRideWait;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
     }
+
     public void ChoosePosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -40,10 +45,11 @@ public class SoapController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1000000000f, maskFloor))
         {
-            transform.position = new Vector3(hit.point.x, hit.point.y+(GetComponent<MeshCollider>().bounds.size.y), hit.point.z);
+            transform.position = new Vector3(hit.point.x, hit.point.y + (GetComponent<MeshCollider>().bounds.size.y),
+                hit.point.z);
         }
 
-       
+
         if (Input.GetMouseButtonDown(0))
         {
             // startingPoint= mouseWorldPos;
@@ -51,6 +57,7 @@ public class SoapController : MonoBehaviour
             state = state.Rotation;
         }
     }
+
     public void rotation()
     {
         //Calcoliamo la posizione della saponetta sull schermo
@@ -61,7 +68,7 @@ public class SoapController : MonoBehaviour
         float angle = -Mathf.Atan2(vectorLook.y, vectorLook.x) * Mathf.Rad2Deg;
         //applichiamo la rotazione alla y per rotarla
         transform.rotation = Quaternion.Euler(transform.rotation.x, angle, transform.rotation.z);
-     
+
         if (Input.GetMouseButtonDown(0))
         {
             rigidBody.constraints = RigidbodyConstraints.FreezeAll;
@@ -70,10 +77,13 @@ public class SoapController : MonoBehaviour
             state = state.Strenght;
         }
     }
-    public void ChooseStrenght(float startx) {
-        float normalizedMouseX = Math.Abs((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 2))*2;
+
+    public void ChooseStrenght(float startx)
+    {
+        float normalizedMouseX = Math.Abs((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 2)) * 2;
         throwForce = Math.Clamp(startx * normalizedMouseX, -1000, startx);
-        stecca.transform.localPosition=new Vector3(Math.Clamp(startx * normalizedMouseX,-1000,startx),  stecca.transform.localPosition.y, stecca.transform.localPosition.z);
+        stecca.transform.localPosition = new Vector3(Math.Clamp(startx * normalizedMouseX, -1000, startx),
+            stecca.transform.localPosition.y, stecca.transform.localPosition.z);
         if (Input.GetMouseButtonDown(0))
         {
             stecca.gameObject.SetActive(false);
@@ -88,19 +98,21 @@ public class SoapController : MonoBehaviour
 
                 return;
             }
-            state = state.Waiting; 
+
+            state = state.Waiting;
         }
     }
- public void moveToBorder()
+
+    public void moveToBorder()
     {
         rigidBody.AddForce(-transform.forward, ForceMode.Force);
-        transform.position += (transform.right)* Time.deltaTime;
+        transform.position += (transform.right) * Time.deltaTime;
     }
+
     void Update()
     {
         switch (state)
         {
-
             case state.Position:
                 ChoosePosition();
                 break;
@@ -123,6 +135,7 @@ public class SoapController : MonoBehaviour
                     Debug.Log("moving");
                     break;
                 }
+
                 Debug.Log("throw");
                 trail.SetActive(true);
                 rigidBody.AddForce(-transform.right * throwForce * throwMultiplier, ForceMode.Impulse);
@@ -135,6 +148,7 @@ public class SoapController : MonoBehaviour
                     state = state.End;
                     break;
                 }
+
                 break;
             case state.End:
                 break;

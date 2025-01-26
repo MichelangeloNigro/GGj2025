@@ -49,7 +49,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
         Debug.LogWarning("Color not found in the dictionary.");
         return PlayerColor.Black; // Default or fallback
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     private void Start()
     {
         InitializeColorDictionary();
@@ -63,6 +63,16 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
         {
             yield return StartCoroutine(InstantiatePlayers()); // Wait for InstantiatePlayers to complete
             turnNumbers++; // Increment turnNumbers after InstantiatePlayers is done
+            if(turnNumbers >= maxTurns)
+                break;
+            
+            placer.state = PlaceState.Pick;
+            buttonManager.StartPlacing();
+            
+            while (placer.state != PlaceState.End)
+            {
+                yield return null;
+            }
         }
         
         pointManager.CalculateFinalScore();
@@ -110,13 +120,8 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
 
         Debug.Log("All soaps have reached state.End! Continuing...");
         pointManager.PrintPlayerPointPercentages();
-        placer.state = PlaceState.Pick;
+        
         Restart();
-        buttonManager.StartPlacing();
-        while (placer.state != PlaceState.End)
-        {
-            yield return null;
-        }
     }
 
     private void Restart()
