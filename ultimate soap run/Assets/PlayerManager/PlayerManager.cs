@@ -66,7 +66,7 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
             if(turnNumbers >= maxTurns)
                 break;
             
-            placer.state = PlaceState.Pick;
+            placer.state = PlaceState.ScoreBoard;
             buttonManager.StartPlacing();
             
             while (placer.state != PlaceState.End)
