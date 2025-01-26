@@ -35,6 +35,7 @@ public class BuildingPlacer : MonoBehaviour
         instance = this; // (Singleton pattern)
         _mainCamera = Camera.main;
         _buildingPrefab = null;
+        numberOfPlayers= PlayerManager.Instance.playerList.Count;
     }
 
     private void Update()
