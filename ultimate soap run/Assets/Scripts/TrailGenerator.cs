@@ -21,6 +21,7 @@ public class TrailGenerator : MonoBehaviour
     
     [SerializeField]
     public PlayerColor playerColor;
+    public AudioSource bubble;
 
     private float time;
 
@@ -43,6 +44,7 @@ public class TrailGenerator : MonoBehaviour
     private void SpawnTrail()
     {
         GameObject newParticle;
+        bubble.Play();
         newParticle = Instantiate(particlePrefab, transform.position, quaternion.identity);
         newParticle.GetComponent<ParticleSystem>().startColor = SetColor(); 
     }
