@@ -187,7 +187,7 @@ MonoBehaviour:
   particlePrefab: {fileID: 967645162240975198, guid: 5f7a45c5ab849fa499e3f32d86e453ce, type: 3}
   interval: 1
   playerColor: 0
-  bubble: {fileID: 0}
+  bubble: {fileID: 3881430537872784242}
 --- !u!82 &3881430537872784242
 AudioSource:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: f45a98f8fd365b443b7aa43d98fc4d61, type: 3}
   m_Resource: {fileID: 8300000, guid: f45a98f8fd365b443b7aa43d98fc4d61, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.21
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -32,7 +32,7 @@ public class SoundEngine : MonoBehaviour
         {
             SetupOST(clip);
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
