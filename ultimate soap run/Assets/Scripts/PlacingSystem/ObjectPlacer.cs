@@ -21,7 +21,6 @@ public class BuildingPlacer : MonoBehaviour
     [Header("Point canvas")]
     public GameObject pointCanvas;
     public GameObject[] pointDisplays;
-    public TMP_Text[] allNames;
     public TMP_Text[] allPoints;
     
     public static BuildingPlacer instance; // (Singleton pattern)
@@ -32,6 +31,7 @@ public class BuildingPlacer : MonoBehaviour
     protected GameObject _toBuild;
 
     protected Camera _mainCamera;
+    private PlayerSpriteDictionary dictionary;
 
     protected Ray _ray;
     protected RaycastHit _hit;
@@ -47,6 +47,7 @@ public class BuildingPlacer : MonoBehaviour
         _mainCamera = Camera.main;
         _buildingPrefab = null;
         state = PlaceState.End;
+        dictionary = GetComponentInChildren<PlayerSpriteDictionary>();
     }
 
     private void Update()
@@ -78,6 +79,11 @@ public class BuildingPlacer : MonoBehaviour
 
         if (!pointsSet)
         {
+            foreach (var player in PlayerManager.Instance.playerList)
+            {
+                player.AssignSprite(player, dictionary.spriteDictionary) ;
+            }
+            
             for (int i = 0; i < PlayerManager.Instance.playerList.Count; i++)
             {
                 var currentPlayer = PlayerManager.Instance.playerList[i];
@@ -85,7 +91,7 @@ public class BuildingPlacer : MonoBehaviour
                     pointDisplays[i].GetComponent<Image>().sprite = currentPlayer.sprite;
                 else
                     pointDisplays[i].GetComponent<Image>().sprite = defaultSprite;
-                allNames[i].text = currentPlayer.name;
+                
                 allPoints[i].text = currentPlayer.totalPoints.ToString();
             }
 
