@@ -53,6 +53,8 @@ public class PlayerManager : Riutilizzabile.SingletonDDOL<PlayerManager>
     private void Start()
     {
         InitializeColorDictionary();
+        StartCoroutine(StartGame());
+
     }
     public IEnumerator StartGame()
     {

@@ -10,6 +10,7 @@ using UnityEngine;
 /// </summary>
 public class SoundEngine : MonoBehaviour
 {
+    const string BackgroudKey = "OST";
     private static readonly Lazy<SoundEngine> _instance = new Lazy<SoundEngine>(() => new SoundEngine());
     /// <summary>
     /// Proprietà per l'istanza della classe.
@@ -21,7 +22,7 @@ public class SoundEngine : MonoBehaviour
     private SoundEngine()
     {
         clips = Resources.LoadAll<AudioClip>("Audio");
-        backgroundSources = from c in clips where c.name.StartsWith("BG") select new AudioSource { clip = c, name = c.name.Replace("BG_", "") };
+        backgroundSources = from c in clips where c.name.StartsWith(BackgroudKey) select new AudioSource { clip = c, name = c.name.Replace($"{BackgroudKey}_", "") };
     }
     // Start is called before the first frame update
     void Start()
