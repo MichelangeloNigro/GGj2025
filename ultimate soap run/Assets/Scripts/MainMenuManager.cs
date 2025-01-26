@@ -28,6 +28,10 @@ public class MainMenuManager : MonoBehaviour
     public List<GameObject> colorfill;
     public ParticleSystem bubblestart;
     public LayerMask uiSoap;
+    public AudioSource clickButton;
+    public AudioClip ok;
+    public AudioClip next;
+    public AudioClip bubble;
 
     
     public void changePanel(GameObject nextPanel)
@@ -38,6 +42,8 @@ public class MainMenuManager : MonoBehaviour
     }
     public void setNumberPlayer(int z)
     {
+        clickButton.PlayOneShot(next);
+
         //if (PlayerManager.Instance.playerList[z] != null)
         //{
         //    PlayerManager.Instance.playerList.RemoveAt(z);
@@ -81,6 +87,7 @@ public class MainMenuManager : MonoBehaviour
     }
     public void NextPlayer()
     {
+        clickButton.PlayOneShot(ok);
         if (PlayerManager.Instance.playerList[choosingPlayer].prefabSoap!=null && PlayerManager.Instance.playerList[choosingPlayer].color!=null)
         {
             choosingPlayer++;
@@ -101,12 +108,14 @@ public class MainMenuManager : MonoBehaviour
     }
     public IEnumerator setbubbleandStart()
     {
+        clickButton.PlayOneShot(bubble);
         bubblestart.Play();
         yield return new WaitForSeconds(bubblestart.startLifetime);
         PlayerManager.Instance.Begin();
     }
     public void ChangeSoap(int i)
     {
+        clickButton.PlayOneShot(next);
         Destroy(currSoapModel);
         currSoap += i;
         spawnObj.GetComponent<Animator>().SetTrigger("selected");
