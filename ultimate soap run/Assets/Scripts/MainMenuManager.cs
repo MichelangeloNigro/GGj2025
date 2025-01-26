@@ -27,7 +27,7 @@ public class MainMenuManager : MonoBehaviour
     public void setNumberPlayer(int z)
     {
         PlayerManager.Instance.playerList.Clear();
-        for (int i = 0; i < z + 2; i++)
+        for (int i = 0; i < z ; i++)
         {
             PlayerManager.Instance.playerList.Add(new Player());
 
