@@ -1,10 +1,5 @@
 using System;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 public enum state
 {

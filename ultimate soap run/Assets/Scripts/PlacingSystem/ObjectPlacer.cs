@@ -1,19 +1,26 @@
+using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public enum PlaceState
 {
     Pick,
     Place,
     End,
-    Wait
+    ScoreBoard
 }
 
 public class BuildingPlacer : MonoBehaviour
 {
     public GameObject pickingCanvas;
+    [Header("Point canvas")]
+    public GameObject pointCanvas;
+    public GameObject[] pointDisplays;
+    
     public static BuildingPlacer instance; // (Singleton pattern)
 
     public LayerMask groundLayerMask;
@@ -26,24 +33,30 @@ public class BuildingPlacer : MonoBehaviour
     protected Ray _ray;
     protected RaycastHit _hit;
 
-    public PlaceState state = PlaceState.Pick;
-    public int numberOfPlayers = 4;
+    public PlaceState state;
+    private int numberOfPlayers = 4;
     private int playersThatPlaced = 0;
+    private bool pointsSet = false;
 
     private void Awake()
     {
         instance = this; // (Singleton pattern)
         _mainCamera = Camera.main;
         _buildingPrefab = null;
-        numberOfPlayers= PlayerManager.Instance.playerList.Count;
+        numberOfPlayers = PlayerManager.Instance.playerList.Count;
+        state = PlaceState.End;
     }
 
     private void Update()
     {
+        Debug.Log(state);
+        
         switch (state)
         { 
-            case PlaceState.Wait:
-                return;
+            case PlaceState.ScoreBoard:
+                OpenPointUI();
+                SkipPoint();
+                break;
             case PlaceState.Pick:
                 OpenPickMenu();
                 break;
@@ -53,6 +66,34 @@ public class BuildingPlacer : MonoBehaviour
             case PlaceState.End: 
                 //change game phase
                 break;
+        }
+    }
+
+    private void OpenPointUI()
+    {
+        if(!pointCanvas.activeSelf)
+            pointCanvas.SetActive(true);
+
+        if (!pointsSet)
+        {
+            for (int i = 0; i < PlayerManager.Instance.playerList.Count; i++)
+            {
+                pointDisplays[i].GetComponentInChildren<SpriteRenderer>().sprite =
+                    PlayerManager.Instance.playerList[i].sprite;
+                pointDisplays[i].GetComponentInChildren<TMP_Text>().text =
+                    PlayerManager.Instance.playerList[i].totalPoints.ToString();
+            }
+
+            pointsSet = true;
+        }
+    }
+
+    private void SkipPoint()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            pointCanvas.SetActive(false);
+            state = PlaceState.Pick;
         }
     }
 
