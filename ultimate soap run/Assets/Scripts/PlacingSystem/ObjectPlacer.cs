@@ -1,19 +1,29 @@
+using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public enum PlaceState
 {
     Pick,
     Place,
     End,
-    Wait
+    ScoreBoard
 }
 
 public class BuildingPlacer : MonoBehaviour
 {
     public GameObject pickingCanvas;
+    public Sprite defaultSprite;
+    [Header("Point canvas")]
+    public GameObject pointCanvas;
+    public GameObject[] pointDisplays;
+    public TMP_Text[] allNames;
+    public TMP_Text[] allPoints;
+    
     public static BuildingPlacer instance; // (Singleton pattern)
 
     public LayerMask groundLayerMask;
@@ -26,23 +36,29 @@ public class BuildingPlacer : MonoBehaviour
     protected Ray _ray;
     protected RaycastHit _hit;
 
-    public PlaceState state = PlaceState.Pick;
-    public int numberOfPlayers = 4;
+    public PlaceState state;
+    private int numberOfPlayers = 4;
     private int playersThatPlaced = 0;
+    private bool pointsSet = false;
 
     private void Awake()
     {
         instance = this; // (Singleton pattern)
         _mainCamera = Camera.main;
         _buildingPrefab = null;
+        state = PlaceState.End;
     }
 
     private void Update()
     {
+        Debug.Log(state);
+        
         switch (state)
         { 
-            case PlaceState.Wait:
-                return;
+            case PlaceState.ScoreBoard:
+                OpenPointUI();
+                SkipPoint();
+                break;
             case PlaceState.Pick:
                 OpenPickMenu();
                 break;
@@ -55,10 +71,44 @@ public class BuildingPlacer : MonoBehaviour
         }
     }
 
+    private void OpenPointUI()
+    {
+        if(!pointCanvas.activeSelf)
+            pointCanvas.SetActive(true);
+
+        if (!pointsSet)
+        {
+            for (int i = 0; i < PlayerManager.Instance.playerList.Count; i++)
+            {
+                var currentPlayer = PlayerManager.Instance.playerList[i];
+                if (currentPlayer.sprite != null)
+                    pointDisplays[i].GetComponent<Image>().sprite = currentPlayer.sprite;
+                else
+                    pointDisplays[i].GetComponent<Image>().sprite = defaultSprite;
+                allNames[i].text = currentPlayer.name;
+                allPoints[i].text = currentPlayer.totalPoints.ToString();
+            }
+
+            pointsSet = true;
+        }
+    }
+
+    private void SkipPoint()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            pointCanvas.SetActive(false);
+            state = PlaceState.Pick;
+        }
+    }
+
     private void OpenPickMenu()
     {
-        if(!pickingCanvas.activeSelf)
+        if (!pickingCanvas.activeSelf)
+        {
             pickingCanvas.SetActive(true);
+            numberOfPlayers = PlayerManager.Instance.playerList.Count;
+        }
     }
 
     public void SetBuildingPrefab(GameObject prefab)

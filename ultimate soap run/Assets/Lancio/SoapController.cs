@@ -1,10 +1,5 @@
 using System;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 public enum state
 {
@@ -24,16 +19,39 @@ public class SoapController : MonoBehaviour
     public int throwMultiplier;
     public float startingX;
     private Rigidbody rigidBody;
-    public GameObject trail;
+    public TrailRenderer trail;
     public state state=state.Position;
     //attenzione la layer mask viene contata in binario, perch� unity xd 
     public LayerMask maskFloor;
     public bool overRideWait;
+    [TextArea]
+    public string description;
+    public int aroma;
+    public int flavor;
+    public int faith;
+    public int shape;
+    public int colourstat;
+    public Color color;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        rigidBody.constraints = RigidbodyConstraints.FreezeAll;
-        rigidBody.isKinematic = true;
+       
+    }
+    public void setColorTrail(Color color)
+    {
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[] {
+                new GradientColorKey(color, 0f), // Start color (solid red)
+                new GradientColorKey(color, 1f) // End color (same red)
+            },
+            new GradientAlphaKey[] {
+                new GradientAlphaKey(1f, 0f), // Fully opaque at the start
+                new GradientAlphaKey(1f, 1f) // Fully opaque at the end
+            }
+        );
+        trail.colorGradient = gradient;
     }
     public void ChoosePosition()
     {
@@ -42,7 +60,7 @@ public class SoapController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1000000000f, maskFloor))
         {
-            transform.position = new Vector3(hit.point.x, hit.point.y+(GetComponent<MeshCollider>().bounds.size.y*4), hit.point.z);
+            transform.position = new Vector3(hit.point.x, hit.point.y+(GetComponent<MeshCollider>().bounds.size.y), hit.point.z);
         }
 
        
@@ -66,6 +84,8 @@ public class SoapController : MonoBehaviour
      
         if (Input.GetMouseButtonDown(0))
         {
+            rigidBody.constraints = RigidbodyConstraints.FreezeAll;
+
             //startingRotation = angle;
             state = state.Strenght;
         }
@@ -80,7 +100,7 @@ public class SoapController : MonoBehaviour
             strenght = Math.Clamp(startx * normalizedMouseX, -1000, startx);
             if (overRideWait)
             {
-                trail.SetActive(true);
+                trail.enabled=true;
                 rigidBody.AddForce(-transform.right * throwForce * throwMultiplier, ForceMode.Impulse);
                 rigidBody.constraints = RigidbodyConstraints.None;
                 rigidBody.isKinematic = false;
@@ -93,7 +113,7 @@ public class SoapController : MonoBehaviour
     }
  public void moveToBorder()
     {
-        rigidBody.AddForce(-transform.forward, ForceMode.Force);
+        //rigidBody.AddForce(-transform.forward, ForceMode.Force);
         transform.position += (transform.right)* Time.deltaTime;
     }
     void Update()
@@ -117,7 +137,6 @@ public class SoapController : MonoBehaviour
                 break;
             case state.Moving:
                 rigidBody.constraints = RigidbodyConstraints.None;
-                rigidBody.isKinematic = false;
                 if (transform.eulerAngles.x <= 320)
                 {
                     moveToBorder();
@@ -125,17 +144,17 @@ public class SoapController : MonoBehaviour
                     break;
                 }
                 Debug.Log("throw");
-                trail.SetActive(true);
+                trail.enabled = true;
                 rigidBody.AddForce(-transform.right * throwForce * throwMultiplier, ForceMode.Impulse);
                 state = state.Playing;
                 break;
             case state.Playing:
-                //if (rigidBody.linearVelocity.magnitude < 1)
-                //{
-                //    rigidBody.linearVelocity = Vector3.zero;
-                //    state = state.End;
-                //    break;
-                //}
+                if (rigidBody.linearVelocity.magnitude < 1)
+                {
+                    rigidBody.linearVelocity = Vector3.zero;
+                    state = state.End;
+                    break;
+                }
                 break;
             case state.End:
                 break;
