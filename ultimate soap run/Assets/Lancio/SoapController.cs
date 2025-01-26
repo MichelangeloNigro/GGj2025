@@ -41,7 +41,7 @@ public class SoapController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1000000000f, maskFloor))
         {
-            transform.position = new Vector3(hit.point.x, hit.point.y+(GetComponent<MeshCollider>().bounds.size.y*4), hit.point.z);
+            transform.position = new Vector3(hit.point.x, hit.point.y+(GetComponent<MeshCollider>().bounds.size.y), hit.point.z);
         }
 
        
