@@ -35,12 +35,35 @@ public class MainMenuManager : MonoBehaviour
     }
     public void setNumberPlayer(int z)
     {
-        PlayerManager.Instance.playerList.Clear();
-        for (int i = 0; i < z ; i++)
-        {
-            PlayerManager.Instance.playerList.Add(new Player());
+        //if (PlayerManager.Instance.playerList[z] != null)
+        //{
+        //    PlayerManager.Instance.playerList.RemoveAt(z);
+        //}
+        //else
+        //{
+        //    PlayerManager.Instance.playerList[z] = new Player();
+        //}
+        if (PlayerManager.Instance.playerList.Count==z) {
+            PlayerManager.Instance.playerList.Clear();
+            for (int i = 0; i < z-1; i++)
+            {
+                PlayerManager.Instance.playerList.Add(new Player());
+
+            }
+
 
         }
+        else
+        {
+            PlayerManager.Instance.playerList.Clear();
+
+            for (int i = 0; i < z; i++)
+            {
+                PlayerManager.Instance.playerList.Add(new Player());
+
+            }
+        }
+       
 
     }
 
