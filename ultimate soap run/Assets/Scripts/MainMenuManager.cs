@@ -74,7 +74,9 @@ public class MainMenuManager : MonoBehaviour
     {
         Destroy(currSoapModel);
         currSoap += i;
-        if(currSoap>=soaps.Count)
+        spawnObj.GetComponent<Animator>().SetTrigger("selected");
+
+        if (currSoap>=soaps.Count)
         {
             currSoap = 0;
         }
