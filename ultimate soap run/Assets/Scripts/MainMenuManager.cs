@@ -3,6 +3,7 @@ using TMPro;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -18,6 +19,11 @@ public class MainMenuManager : MonoBehaviour
     private Dictionary<Color, PlayerColor> colorToPlayerColorMap;
     public GameObject spawnObj;
     public TMP_Text description;
+    public List <GameObject> aromafill;
+    public List <GameObject> flavofill;
+    public List <GameObject> gaithfill;
+    public List <GameObject> shapefill;
+    public List <GameObject> colorfill;
     public void changePanel(GameObject nextPanel)
     {
         currPanel.SetActive(false);
@@ -77,10 +83,11 @@ public class MainMenuManager : MonoBehaviour
             currSoap = soaps.Count-1;
 
         }
-        currSoapModel= Instantiate(soaps[currSoap], spawnObj.transform.position, soaps[currSoap].transform.rotation);
+        currSoapModel= Instantiate(soaps[currSoap], spawnObj.transform.position, soaps[currSoap].transform.rotation,spawnObj.transform);
         namesoap.text=currSoapModel.name.Replace("(Clone)","");
         PlayerManager.Instance.playerList[choosingPlayer].prefabSoap = soaps[currSoap];
         description.text = soaps[currSoap].GetComponent<SoapController>().description;
+        setStats();
     }
     private void Start()
     {
@@ -105,7 +112,49 @@ public class MainMenuManager : MonoBehaviour
             { Color.black,PlayerColor.Black}
         };
     }
-
+    public void setStats() {
+        foreach (var item in aromafill)
+        {
+            item.SetActive(false);
+        }
+        foreach (var item in flavofill)
+        {
+            item.SetActive(false);
+        }
+        foreach (var item in gaithfill)
+        {
+            item.SetActive(false);
+        }
+        foreach (var item in shapefill)
+        {
+            item.SetActive(false);
+        }
+        foreach (var item in colorfill)
+        {
+            item.SetActive(false);
+        }
+        var currcontroller = soaps[currSoap].GetComponent<SoapController>();
+        for (int i = 0; i < currcontroller.aroma; i++)
+        {
+            aromafill[i].SetActive(enabled);
+        }
+        for (int j = 0; j < currcontroller.flavor; j++)
+        {
+            flavofill[j].SetActive(enabled);
+        }
+        for (int k = 0;k  < currcontroller.faith; k++)
+        {
+            gaithfill[k].SetActive(enabled);
+        }
+        for (int i = 0; i < currcontroller.shape; i++)
+        {
+            shapefill[i].SetActive(enabled);
+        }
+        for (int i = 0; i < currcontroller.colourstat; i++)
+        {
+            colorfill[i].SetActive(enabled);
+        }
+    }
     public PlayerColor GetPlayerColorFromColor(Color color)
     {
         if (colorToPlayerColorMap.TryGetValue(color, out PlayerColor playerColor))

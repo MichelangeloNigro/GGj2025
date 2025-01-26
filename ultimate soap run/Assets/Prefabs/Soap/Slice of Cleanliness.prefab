@@ -1,5 +1,91 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &525596874453891910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1152121170684419436}
+  - component: {fileID: 7030337539755403969}
+  - component: {fileID: 1940410142641158130}
+  m_Layer: 0
+  m_Name: 'spinta '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1152121170684419436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525596874453891910}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.010929999, y: 0.00191, z: 0}
+  m_LocalScale: {x: 0.22999999, y: 0.22999999, z: 0.22999999}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5718395766705576374}
+  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
+--- !u!33 &7030337539755403969
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525596874453891910}
+  m_Mesh: {fileID: 2484297765696658124, guid: f46ee4dfb87b57b42992ab684fb90c9c, type: 3}
+--- !u!23 &1940410142641158130
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525596874453891910}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: c6132d413aa453a4e8ba418028abe6d5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &768635685734615075
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,92 +133,6 @@ MonoBehaviour:
   particlePrefab: {fileID: 967645162240975198, guid: 5f7a45c5ab849fa499e3f32d86e453ce, type: 3}
   interval: 5
   playerColor: 0
---- !u!1 &3338181857663711361
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6451557651107730954}
-  - component: {fileID: 5192216964443073185}
-  - component: {fileID: 5745394538262669471}
-  m_Layer: 0
-  m_Name: spinta (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &6451557651107730954
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3338181857663711361}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -0.01842, y: 0.00191, z: 0}
-  m_LocalScale: {x: 0.22999999, y: 0.22999999, z: 0.22999999}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 5718395766705576374}
-  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
---- !u!33 &5192216964443073185
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3338181857663711361}
-  m_Mesh: {fileID: 2484297765696658124, guid: f46ee4dfb87b57b42992ab684fb90c9c, type: 3}
---- !u!23 &5745394538262669471
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3338181857663711361}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: c6132d413aa453a4e8ba418028abe6d5, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1001 &5247093626943061597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196,14 +196,10 @@ PrefabInstance:
     - target: {fileID: -5754084199372789682, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -7891210913142809081, guid: 9443104411c0ae64796125832630154e, type: 3}
+      objectReference: {fileID: -915864327268288270, guid: dbc4aea3e31aebb47818899e06fcc4b1, type: 3}
     - target: {fileID: 919132149155446097, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
       propertyPath: m_Name
-      value: Soap Sacro
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: Slice of Cleanliness
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
       propertyPath: m_TagString
@@ -214,7 +210,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6451557651107730954}
+      addedObject: {fileID: 1152121170684419436}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
       insertIndex: -1
       addedObject: {fileID: 609580015921191945}
@@ -233,7 +229,7 @@ PrefabInstance:
       addedObject: {fileID: 9155980261387729216}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2048350332168151043}
+      addedObject: {fileID: -3637311678770977764}
   m_SourcePrefab: {fileID: 100100000, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
 --- !u!1 &4904422243110814476 stripped
 GameObject:
@@ -252,16 +248,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903aa75c3b8888b48bebe9cc7bac4dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stecca: {fileID: 3338181857663711361}
+  stecca: {fileID: 525596874453891910}
   throwMultiplier: 1000
   startingX: 0
-  trail: {fileID: 2048350332168151043}
+  trail: {fileID: -3637311678770977764}
   state: 0
   maskFloor:
     serializedVersion: 2
     m_Bits: 64
   overRideWait: 0
-  description: test
+  description: "Pizza soap: it lathers, but it\u2019s not just soap! It\u2019s our
+    gooey, cheesy bar, perfect for anyone who dreams of a mozzarella-scented shower.
+    Because washing up can be a real pizza party!"
   aroma: 0
   flavor: 0
   faith: 0
@@ -289,7 +287,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -7891210913142809081, guid: 9443104411c0ae64796125832630154e, type: 3}
+  m_Mesh: {fileID: -915864327268288270, guid: dbc4aea3e31aebb47818899e06fcc4b1, type: 3}
 --- !u!54 &3779383502852101383
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -330,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPoints: []
---- !u!96 &2048350332168151043
+--- !u!96 &-3637311678770977764
 TrailRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 0
