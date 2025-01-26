@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stecca: {fileID: 4549854982701457643}
-  throwMultiplier: 1000
+  throwMultiplier: 1
   startingX: 0
   trail: {fileID: 8985072881721493376}
   state: 0
