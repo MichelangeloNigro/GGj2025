@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor.UI;
@@ -6,6 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -23,7 +25,8 @@ public class MainMenuManager : MonoBehaviour
     public List <GameObject> flavofill;
     public List <GameObject> gaithfill;
     public List <GameObject> shapefill;
-    public List <GameObject> colorfill;
+    public List<GameObject> colorfill;
+    public ParticleSystem bubblestart;
     public void changePanel(GameObject nextPanel)
     {
         currPanel.SetActive(false);
@@ -60,7 +63,7 @@ public class MainMenuManager : MonoBehaviour
                 Debug.Log("startGame");
                 Destroy(currSoapModel);
                 currPanel.SetActive(false);
-                PlayerManager.Instance.Begin();
+                StartCoroutine(setbubbleandStart());
             }
             else
             {
@@ -70,11 +73,19 @@ public class MainMenuManager : MonoBehaviour
             namefield.text = (choosingPlayer + 1).ToString();
         }
     }
+    public IEnumerator setbubbleandStart()
+    {
+        bubblestart.Play();
+        yield return new WaitForSeconds(bubblestart.startLifetime);
+        PlayerManager.Instance.Begin();
+    }
     public void ChangeSoap(int i)
     {
         Destroy(currSoapModel);
         currSoap += i;
-        if(currSoap>=soaps.Count)
+        spawnObj.GetComponent<Animator>().SetTrigger("selected");
+
+        if (currSoap>=soaps.Count)
         {
             currSoap = 0;
         }

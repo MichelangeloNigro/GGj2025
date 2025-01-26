@@ -100,7 +100,6 @@ public class SoapController : MonoBehaviour
             strenght = Math.Clamp(startx * normalizedMouseX, -1000, startx);
             if (overRideWait)
             {
-                trail.enabled=true;
                 rigidBody.AddForce(-transform.right * throwForce * throwMultiplier, ForceMode.Impulse);
                 rigidBody.constraints = RigidbodyConstraints.None;
                 rigidBody.isKinematic = false;
