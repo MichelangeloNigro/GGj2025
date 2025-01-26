@@ -213,4 +213,9 @@ public class MainMenuManager : MonoBehaviour
         Debug.LogWarning("Color not found in the dictionary.");
         return PlayerColor.Black; // Default or fallback
     }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

@@ -6,7 +6,7 @@ public class saponestart : MonoBehaviour
 {
     private void Start()
     {
-        SoundEngine.Instance.PlayOST("Menu");
+        //SoundEngine.Instance.PlayOST("Menu");
     }
     private void OnTriggerEnter(Collider other)
     {

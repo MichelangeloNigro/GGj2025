@@ -19,8 +19,6 @@ public class TrailGenerator : MonoBehaviour
     [SerializeField] private GameObject particlePrefab;
     [SerializeField] private float interval = 0.5f;
     
- 
-
     [SerializeField]
     public PlayerColor playerColor;
 

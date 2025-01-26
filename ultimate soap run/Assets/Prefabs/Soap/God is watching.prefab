@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particlePrefab: {fileID: 967645162240975198, guid: 5f7a45c5ab849fa499e3f32d86e453ce, type: 3}
-  interval: 5
+  interval: 1
   playerColor: 0
 --- !u!1 &3338181857663711361
 GameObject:
@@ -395,6 +395,7 @@ MonoBehaviour:
   throwMultiplier: 1000
   startingX: 0
   trail: {fileID: 1726280293798382613}
+  particle: {fileID: 768635685734615075}
   state: 0
   maskFloor:
     serializedVersion: 2

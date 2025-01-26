@@ -1075,6 +1075,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ae89b121c63c80b4baf371fb004a7515, type: 3}
   m_PrefabInstance: {fileID: 517002685}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1073759261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1073759263}
+  - component: {fileID: 1073759262}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1073759262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073759261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315fc720cfc38bc4d9271278a991a505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1073759263
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073759261}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.464235, y: -9.982349, z: 278.23102}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1191962507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,6 +1923,7 @@ MonoBehaviour:
   throwMultiplier: 10000
   startingX: 0
   trail: {fileID: 0}
+  particle: {fileID: 0}
   state: 1
   maskFloor:
     serializedVersion: 2
@@ -1891,6 +1936,8 @@ MonoBehaviour:
   shape: 0
   colourstat: 0
   color: {r: 0, g: 0, b: 0, a: 0}
+  minPLayTime: 5
+  timecur: 0
 --- !u!114 &1722318962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2774,3 +2821,4 @@ SceneRoots:
   - {fileID: 1832980791}
   - {fileID: 62158969}
   - {fileID: 1485599793}
+  - {fileID: 1073759263}

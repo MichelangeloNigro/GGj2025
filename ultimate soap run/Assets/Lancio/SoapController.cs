@@ -21,6 +21,7 @@ public class SoapController : MonoBehaviour
     public float startingX;
     private Rigidbody rigidBody;
     public TrailRenderer trail;
+    public GameObject particle;
     public state state=state.Position;
     //attenzione la layer mask viene contata in binario, perch� unity xd 
     public LayerMask maskFloor;
@@ -39,7 +40,6 @@ public class SoapController : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        trail = GetComponentInChildren<TrailRenderer>();
     }
     
     public void setColorTrail(Color color)
@@ -51,8 +51,8 @@ public class SoapController : MonoBehaviour
                 new GradientColorKey(color, 1f) // End color (same red)
             },
             new GradientAlphaKey[] {
-                new GradientAlphaKey(1f, 0f), // Fully opaque at the start
-                new GradientAlphaKey(1f, 1f) // Fully opaque at the end
+                new GradientAlphaKey(0.8f, 0f), // Fully opaque at the start
+                new GradientAlphaKey(0.3f, 1f) // Fully opaque at the end
             }
         );
         trail.colorGradient = gradient;
@@ -147,7 +147,8 @@ public class SoapController : MonoBehaviour
                     break;
                 }
                 Debug.Log("throw");
-                trail.enabled = true;
+                trail.gameObject.SetActive(true);
+                particle.SetActive(true);
                 rigidBody.AddForce(-transform.right * throwForce * throwMultiplier, ForceMode.Impulse);
                 timecur = 0;
                 state = state.Playing;
