@@ -155,7 +155,7 @@ public class SoapController : MonoBehaviour
                 break;
             case state.Playing:
                 timecur += Time.deltaTime;
-                if (rigidBody.linearVelocity.magnitude < 0.8&&timecur>minPLayTime)
+                if (rigidBody.linearVelocity.magnitude < 0.4&&timecur>minPLayTime)
                 {
                     rigidBody.linearVelocity = Vector3.zero;
                     state = state.End;
@@ -163,6 +163,11 @@ public class SoapController : MonoBehaviour
                 }
                 break;
             case state.End:
+                if (rigidBody.linearVelocity.magnitude >1)
+                {
+                    state = state.Playing;
+
+                }
                 break;
         }
     }

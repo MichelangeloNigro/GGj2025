@@ -16,6 +16,7 @@ public class Duckie : MonoBehaviour
         {
             Vector3 impulse = Vector3.up * impulseStrength;
             rb.AddForce(impulse, ForceMode.Acceleration);
+            other.rigidbody.linearVelocity *= 2;
         }
     }
 

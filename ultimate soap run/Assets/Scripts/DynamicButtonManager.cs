@@ -70,7 +70,7 @@ public class DynamicButtonManager : MonoBehaviour
             BuildingPlacer.instance.SetBuildingPrefab(item);
         }
 
-        button.gameObject.SetActive(false);
+       // button.gameObject.SetActive(false);
     }
 
     private void ShuffleItems()
