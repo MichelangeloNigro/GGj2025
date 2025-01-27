@@ -74,8 +74,8 @@ public class TrailGenerator : MonoBehaviour
                 return new Color(0.87f, 0.36f, 0.67f, 1);
                 break;
             case PlayerColor.celeste:
-            return new Color(0.40f, 0.94f, 0.92f, 1);
-
+                return new Color(0.47f, 0.95f, 0.93f, 1);
+                break;
         }
 
         return Color.black;

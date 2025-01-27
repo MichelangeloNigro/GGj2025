@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rampBoost: 300
+  jumpsound: {fileID: 2867904702894351619}
 --- !u!82 &2867904702894351619
 AudioSource:
   m_ObjectHideFlags: 0
@@ -472,7 +473,7 @@ AudioSource:
   m_GameObject: {fileID: 3499929134247104130}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 0f2873b634ed3e64b9f96f3ae966db4d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 6b7fe8163715606469aa8e5b83fd532c, type: 3}
   m_Resource: {fileID: 8300000, guid: 6b7fe8163715606469aa8e5b83fd532c, type: 3}
   m_PlayOnAwake: 1

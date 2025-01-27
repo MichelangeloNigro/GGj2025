@@ -153,7 +153,7 @@ public class MainMenuManager : MonoBehaviour
             { new Color(0.50f, 0.78f, 0.48f, 1), PlayerColor.Green },
             {new Color(0.87f, 0.70f, 0.45f, 1), PlayerColor.Yellow },
             { new Color(0.70f, 0.49f, 0.78f, 1), PlayerColor.Purple },
-            {  new Color(0.40f, 0.94f, 0.92f, 1), PlayerColor.celeste },
+            {  new Color(0.47f, 0.95f, 0.93f, 1), PlayerColor.celeste },
             { new Color(0.87f, 0.36f, 0.67f, 1), PlayerColor.Pink },
             { Color.black,PlayerColor.Black}
         };

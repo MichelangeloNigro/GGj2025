@@ -8,6 +8,7 @@ public class DeathTrigger : MonoBehaviour
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
             rb.linearVelocity = Vector3.zero;
+            other.GetComponent<SoapController>().state=state.End;
         }
         else
         {
