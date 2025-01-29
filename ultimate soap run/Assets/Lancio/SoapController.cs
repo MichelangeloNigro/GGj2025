@@ -18,7 +18,7 @@ public class SoapController : MonoBehaviour
     private float throwForce;
     public GameObject stecca;
     public int throwMultiplier;
-    public float startingX;
+    private float startingX;
     private Rigidbody rigidBody;
     public TrailRenderer trail;
     public GameObject particle;
@@ -34,12 +34,16 @@ public class SoapController : MonoBehaviour
     public int shape;
     public int colourstat;
     public Color color;
-    public float minPLayTime = 5f;
-    public float timecur = 0;
+    private float minPLayTime = 5f;
+    private float timecur = 0;
+    public float bounceFactor=1;
+    public float maxLife;
+    public float life;
     
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        life= maxLife;
     }
     
     public void setColorTrail(Color color)
@@ -119,6 +123,15 @@ public class SoapController : MonoBehaviour
         //rigidBody.AddForce(-transform.forward, ForceMode.Force);
         transform.position += (transform.right)* Time.deltaTime;
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player")&&(state==state.Playing||state==state.End))
+        {
+            var contact = collision.GetContact(0);
+            GetComponent<AudioSource>().Play();
+            collision.rigidbody.AddForce(-contact.normal * bounceFactor, ForceMode.Impulse);
+        }
+    }
     void Update()
     {
         switch (state)
@@ -161,6 +174,11 @@ public class SoapController : MonoBehaviour
                     state = state.End;
                     break;
                 }
+                //in media un turno usa 2 circa di vita 
+                life -= (rigidBody.linearVelocity.magnitude/10000);
+                rigidBody.mass -= (rigidBody.linearVelocity.magnitude / 100000);
+                var scale = (100 * life) / maxLife;
+                transform.localScale = new Vector3(scale,scale,scale);
                 break;
             case state.End:
                 if (rigidBody.linearVelocity.magnitude >1)

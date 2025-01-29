@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player
 {
     public string name;
-    public PlayerColor color;
+    public PlayerColor color=PlayerColor.Black;
     public GameObject prefabSoap;
     public GameObject soapIntance;
     public SoapController soapController;

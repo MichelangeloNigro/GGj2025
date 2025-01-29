@@ -30,8 +30,10 @@ public class MainMenuManager : MonoBehaviour
     public AudioClip ok;
     public AudioClip next;
     public AudioClip bubble;
+    public List<Button> playerButtons;
+    private bool settingPlayers = false;
 
-    
+
     public void changePanel(GameObject nextPanel)
     {
         clickButton.PlayOneShot(ok);
@@ -41,8 +43,80 @@ public class MainMenuManager : MonoBehaviour
     }
     public void setNumberPlayer(int z)
     {
-        clickButton.PlayOneShot(next);
+        
+        if (!settingPlayers)
+        {
+            clickButton.PlayOneShot(next);
+            settingPlayers =true;
+            if (PlayerManager.Instance.playerList.Count == z)
+            {
+                for (int a = z - 1; a < playerButtons.Count; a++)
+                {
+                    playerButtons[a].interactable = true;
 
+                }
+                PlayerManager.Instance.playerList = new List<Player>();
+                for (int k = z - 3; k > -1; k--)
+                {
+                    playerButtons[k].interactable = true;
+                    playerButtons[k].onClick.Invoke();
+                }
+                settingPlayers = false;
+                return;
+            }
+            //if (PlayerManager.Instance.playerList.Count < z)
+            //{
+            //    PlayerManager.Instance.playerList = new List<Player>();
+            //    for (int k = z - 3; k > -1; k--)
+            //    {
+            //        playerButtons[k].interactable = false;
+            //        //playerButtons[k].onClick.Invoke();
+            //    }
+            //    for (int i = 0; i < z; i++)
+            //    {
+
+            //        PlayerManager.Instance.playerList.Add(new Player());
+
+            //    }
+            //    settingPlayers = false;
+            //    return;
+            //}
+            //if (PlayerManager.Instance.playerList.Count > z)
+            //{
+            //    PlayerManager.Instance.playerList = new List<Player>();
+            //    for (int k = z - 3; k > -1; k--)
+            //    {
+            //        playerButtons[k].interactable = false;
+            //        //playerButtons[k].onClick.Invoke();
+            //    }
+            //    for (int i = 0; i < z; i++)
+            //    {
+
+            //        PlayerManager.Instance.playerList.Add(new Player());
+
+            //    }
+            //    settingPlayers = false;
+            //    return;
+            //}
+            for (int k = z-3; k >-1; k--)
+            {
+                playerButtons[k].interactable = false ;
+                playerButtons[k].onClick.Invoke();
+            }
+            for (int a = z-1; a < playerButtons.Count; a++)
+            {
+                playerButtons[a].interactable = false;
+
+            }
+            for (int i = 0; i < z; i++)
+            {
+
+                PlayerManager.Instance.playerList.Add(new Player());
+
+            }
+            settingPlayers=false;
+        }
+      
         //if (PlayerManager.Instance.playerList[z] != null)
         //{
         //    PlayerManager.Instance.playerList.RemoveAt(z);
@@ -51,27 +125,23 @@ public class MainMenuManager : MonoBehaviour
         //{
         //    PlayerManager.Instance.playerList[z] = new Player();
         //}
-        if (PlayerManager.Instance.playerList.Count==z) {
-            PlayerManager.Instance.playerList.Clear();
-            for (int i = 0; i < z-1; i++)
-            {
-                PlayerManager.Instance.playerList.Add(new Player());
-
-            }
 
 
-        }
-        else
-        {
-            PlayerManager.Instance.playerList.Clear();
+        //if (PlayerManager.Instance.playerList.Count==z) {
+        //    for (int i = 0; i < z-1; i++)
+        //    {
+        //        PlayerManager.Instance.playerList.Add(new Player());
 
-            for (int i = 0; i < z; i++)
-            {
-                PlayerManager.Instance.playerList.Add(new Player());
+        //    }
 
-            }
-        }
-       
+
+        //}
+        //else
+        //{
+
+
+
+
 
     }
 
@@ -86,9 +156,9 @@ public class MainMenuManager : MonoBehaviour
     }
     public void NextPlayer()
     {
-        clickButton.PlayOneShot(ok);
-        if (PlayerManager.Instance.playerList[choosingPlayer].prefabSoap!=null && PlayerManager.Instance.playerList[choosingPlayer].color!=null)
+        if (PlayerManager.Instance.playerList[choosingPlayer].prefabSoap!=null && PlayerManager.Instance.playerList[choosingPlayer].color!=PlayerColor.Black)
         {
+            clickButton.PlayOneShot(ok);
             choosingPlayer++;
             if (choosingPlayer==PlayerManager.Instance.playerList.Count)
             {
@@ -131,6 +201,7 @@ public class MainMenuManager : MonoBehaviour
         currSoapModel.layer =7;
         namesoap.text=currSoapModel.name.Replace("(Clone)","");
         PlayerManager.Instance.playerList[choosingPlayer].prefabSoap = soaps[currSoap];
+        PlayerManager.Instance.playerList[choosingPlayer].color = PlayerColor.Black;
         description.text = soaps[currSoap].GetComponent<SoapController>().description;
         setStats();
     }
